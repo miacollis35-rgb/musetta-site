@@ -1,0 +1,179 @@
+import Image from "next/image";
+import Link from "next/link";
+
+const featured = [
+  {
+    title: "French armoire, c. 1860",
+    note: "Walnut, original iron fittings",
+    price: "$4,200",
+  },
+  {
+    title: "Chinese blue & white ginger jar",
+    note: "Kangxi-style, 19th century",
+    price: "$980",
+  },
+  {
+    title: "Bessarabian kilim",
+    note: "260 × 310cm, hand-woven wool",
+    price: "$2,600",
+  },
+];
+
+export default function Home() {
+  return (
+    <>
+      {/* Hero */}
+      <section className="mx-auto flex max-w-6xl flex-col items-center px-6 pb-20 pt-16 text-center md:pb-28 md:pt-24">
+        <p className="eyebrow text-ink-soft">
+          Antiques &middot; Hosted Dinners &middot; Paris
+        </p>
+        <Image
+          src="/brand/musetta-logo-full.svg"
+          alt="Musetta"
+          width={2904}
+          height={852}
+          priority
+          className="mt-8 h-auto w-full max-w-2xl"
+        />
+        <p className="font-display mt-8 max-w-xl text-2xl italic text-ink-soft md:text-3xl">
+          A living showroom for objects that were always meant to be used,
+          not shelved.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/showroom"
+            className="eyebrow rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bordeaux"
+          >
+            Step Into the Showroom
+          </Link>
+          <Link
+            href="/collection"
+            className="eyebrow rounded-full border border-ink px-6 py-3 transition-colors hover:border-bronze hover:text-bronze"
+          >
+            View the Collection
+          </Link>
+        </div>
+      </section>
+
+      {/* The idea */}
+      <section className="border-y border-line/70 bg-paper">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[1fr_1.3fr] md:gap-16 md:px-10 md:py-28">
+          <div>
+            <p className="eyebrow text-bronze">The Idea</p>
+          </div>
+          <div>
+            <p className="font-display text-3xl leading-snug text-ink md:text-4xl">
+              Most galleries put a piece behind glass and call that respect.
+              We think a chair wants to be sat in.
+            </p>
+            <p className="mt-6 max-w-2xl text-ink-soft">
+              Musetta began as a rejection of the white cube: the sterile
+              grid of stock photography and price tags that flattens every
+              object into the same catalogue page. Instead, our showroom is a
+              lived-in apartment — nearly everything in it, down to the cup
+              you drink from and the table you set it on, is for sale. You
+              meet each piece the way you would in a friend&rsquo;s home:
+              in use, in context, in conversation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured pieces */}
+      <section className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
+        <div className="mb-12 flex items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow text-bronze">Recently Found</p>
+            <h2 className="font-display mt-2 text-3xl md:text-4xl">
+              A few pieces passing through
+            </h2>
+          </div>
+          <Link
+            href="/collection"
+            className="eyebrow hidden shrink-0 underline decoration-line underline-offset-4 hover:text-bronze md:block"
+          >
+            Full Collection →
+          </Link>
+        </div>
+
+        <div className="grid gap-10 md:grid-cols-3">
+          {featured.map((item, i) => (
+            <div key={item.title} className="group">
+              <div
+                className={`aspect-[4/5] w-full border border-line/70 bg-plaster-deep transition-colors group-hover:border-bronze ${
+                  i === 1 ? "md:translate-y-8" : ""
+                }`}
+                aria-hidden
+              />
+              <div className="mt-4 flex items-baseline justify-between gap-4">
+                <h3 className="font-display text-xl">{item.title}</h3>
+                <span className="font-mono shrink-0 text-sm text-bronze">
+                  {item.price}
+                </span>
+              </div>
+              <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
+            </div>
+          ))}
+        </div>
+
+        <Link
+          href="/collection"
+          className="eyebrow mt-10 block text-center underline decoration-line underline-offset-4 hover:text-bronze md:hidden"
+        >
+          Full Collection →
+        </Link>
+      </section>
+
+      {/* Hosted dinners */}
+      <section className="bg-bordeaux text-plaster">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[1.3fr_1fr] md:gap-16 md:px-10 md:py-28">
+          <div>
+            <p className="eyebrow text-rose">Hosted Dinners</p>
+            <h2 className="font-display mt-3 text-3xl leading-snug md:text-4xl">
+              The table is set with what&rsquo;s in the room — and everything
+              on it can go home with you.
+            </h2>
+            <p className="mt-6 max-w-lg text-plaster/85">
+              A handful of evenings each season, the showroom becomes a
+              dinner table. Small parties, a menu built around the season,
+              and a room full of pieces you&rsquo;re welcome to ask about
+              between courses.
+            </p>
+          </div>
+          <div className="flex flex-col justify-center gap-4 border-t border-plaster/25 pt-8 md:border-l md:border-t-0 md:pl-16 md:pt-0">
+            <p className="font-mono text-sm text-plaster/70">
+              Next evening
+              <br />
+              <span className="text-plaster">Sydney — dates by enquiry</span>
+            </p>
+            <Link
+              href="/contact"
+              className="eyebrow mt-2 w-fit rounded-full border border-plaster/60 px-6 py-3 transition-colors hover:border-plaster hover:bg-plaster hover:text-bordeaux"
+            >
+              Request an Invitation
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Paris */}
+      <section className="mx-auto max-w-6xl px-6 py-20 text-center md:py-28">
+        <p className="eyebrow text-bronze">Opening Soon</p>
+        <h2 className="font-display mt-3 text-3xl md:text-4xl">
+          Musetta is coming to Paris
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
+          A second showroom, a second table. Join the list to hear first
+          about the opening, the first dinners, and the pieces making the
+          journey.
+        </p>
+        <Link
+          href="/contact"
+          className="eyebrow mt-8 inline-block rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
+        >
+          Join the Paris List
+        </Link>
+      </section>
+    </>
+  );
+}

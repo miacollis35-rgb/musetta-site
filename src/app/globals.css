@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+:root {
+  /* Color tokens — warm Parisian apartment palette */
+  --plaster: #e7e0d1;      /* background — aged plaster wall */
+  --plaster-deep: #ded5c1; /* section contrast */
+  --ink: #221e19;          /* primary text — warm near-black */
+  --ink-soft: #4a423a;     /* secondary text */
+  --bronze: #8a6a3c;       /* accent — aged brass / patina */
+  --bordeaux: #5c2430;     /* secondary accent — wine, hosted dinners */
+  --rose: #dcb9bd;         /* whisper accent, from the mark's origin */
+  --line: #c6b99f;         /* hairline rule */
+  --paper: #f4efe4;        /* card surface, lighter than bg */
+}
+
+@theme inline {
+  --color-plaster: var(--plaster);
+  --color-plaster-deep: var(--plaster-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-bronze: var(--bronze);
+  --color-bordeaux: var(--bordeaux);
+  --color-rose: var(--rose);
+  --color-line: var(--line);
+  --color-paper: var(--paper);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body), serif;
+}
+
+.font-display {
+  font-family: var(--font-display), serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.eyebrow {
+  font-family: var(--font-mono), monospace;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* visible keyboard focus */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--bronze);
+  outline-offset: 3px;
+}

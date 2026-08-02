@@ -1,0 +1,56 @@
+<svg viewBox="0 0 1200 760" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#221e19" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <!-- floor line -->
+  <line x1="0" y1="640" x2="1200" y2="640" stroke="#c6b99f" stroke-width="1.4"/>
+  <!-- window -->
+  <rect x="70" y="80" width="220" height="320" rx="2" stroke="#c6b99f" stroke-width="1.4"/>
+  <line x1="180" y1="80" x2="180" y2="400" stroke="#c6b99f" stroke-width="1.4"/>
+  <line x1="70" y1="240" x2="290" y2="240" stroke="#c6b99f" stroke-width="1.4"/>
+  <!-- curtain -->
+  <path d="M70 80 Q60 240 78 400" stroke="#c6b99f" stroke-width="1.4"/>
+
+  <!-- rug -->
+  <ellipse cx="640" cy="660" rx="340" ry="42" stroke="#c6b99f" stroke-width="1.4"/>
+  <ellipse cx="640" cy="660" rx="280" ry="30" stroke="#c6b99f" stroke-width="1.2"/>
+
+  <!-- armchair -->
+  <g id="armchair">
+    <path d="M430 470 q0 -70 55 -70 h90 q55 0 55 70 v90 h-200 z"/>
+    <path d="M430 520 h-25 v70 h25" />
+    <path d="M630 520 h25 v70 h-25" />
+    <line x1="440" y1="560" x2="440" y2="610"/>
+    <line x1="620" y1="560" x2="620" y2="610"/>
+    <path d="M430 470 q0 -30 25 -30" />
+    <path d="M630 470 q0 -30 -25 -30" />
+  </g>
+
+  <!-- side table with lamp -->
+  <g id="lamp">
+    <line x1="740" y1="560" x2="740" y2="620"/>
+    <line x1="820" y1="560" x2="820" y2="620"/>
+    <line x1="735" y1="560" x2="825" y2="560"/>
+    <line x1="745" y1="470" x2="745" y2="545"/>
+    <path d="M710 470 h70 l-14 -55 h-42 z"/>
+  </g>
+
+  <!-- small table with cup -->
+  <g id="table-cup">
+    <ellipse cx="920" cy="560" rx="60" ry="10"/>
+    <line x1="875" y1="566" x2="875" y2="615"/>
+    <line x1="965" y1="566" x2="965" y2="615"/>
+    <ellipse cx="905" cy="548" rx="16" ry="6"/>
+    <path d="M889 548 q0 16 16 18 q16 -2 16 -18"/>
+    <path d="M921 552 q10 0 10 8 q0 8 -10 6"/>
+  </g>
+
+  <!-- artwork on wall -->
+  <g id="artwork">
+    <rect x="920" y="150" width="150" height="190" rx="1" stroke-width="2"/>
+    <path d="M940 300 l30 -50 25 30 20 -40 25 60z" stroke="#8a6a3c"/>
+  </g>
+
+  <!-- mirror -->
+  <g id="mirror">
+    <ellipse cx="360" cy="230" rx="55" ry="75" stroke-width="2"/>
+    <ellipse cx="360" cy="230" rx="45" ry="65" stroke="#c6b99f" stroke-width="1.2"/>
+  </g>
+</svg>
