@@ -20,11 +20,11 @@ export default function Nav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
         <Link href="/" className="flex items-center gap-3" aria-label="Musetta home">
           <Image
-            src="/brand/musetta-icon.svg"
+            src="/brand/musetta-icon-transparent.png"
             alt=""
-            width={28}
+            width={32}
             height={32}
-            className="h-8 w-auto"
+            className="h-8 w-8 object-contain"
             priority
           />
           <span className="font-display text-2xl tracking-wide">Musetta</span>

@@ -26,35 +26,47 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="mx-auto flex max-w-6xl flex-col items-center px-6 pb-20 pt-16 text-center md:pb-28 md:pt-24">
-        <p className="eyebrow text-ink-soft">
-          Antiques &middot; Hosted Dinners &middot; Paris
-        </p>
+      <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
         <Image
-          src="/brand/musetta-logo-full.svg"
-          alt="Musetta"
-          width={2904}
-          height={852}
+          src="/hero/living-room-harbor.webp"
+          alt="A sunlit corner of the Musetta showroom in Elizabeth Bay, overlooking the harbour"
+          fill
           priority
-          className="mt-8 h-auto w-full max-w-2xl"
+          sizes="100vw"
+          className="object-cover"
         />
-        <p className="font-display mt-8 max-w-xl text-2xl italic text-ink-soft md:text-3xl">
-          A living showroom for objects that were always meant to be used,
-          not shelved.
-        </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/showroom"
-            className="eyebrow rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bordeaux"
-          >
-            Step Into the Showroom
-          </Link>
-          <Link
-            href="/collection"
-            className="eyebrow rounded-full border border-ink px-6 py-3 transition-colors hover:border-bronze hover:text-bronze"
-          >
-            View the Collection
-          </Link>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/45" />
+
+        <div className="relative flex flex-col items-center">
+          <p className="eyebrow text-paper/90">
+            Antiques &middot; Hosted Dinners &middot; Paris
+          </p>
+          <Image
+            src="/brand/musetta-logo-full-transparent.png"
+            alt="Musetta"
+            width={1079}
+            height={881}
+            priority
+            className="mt-8 h-auto w-full max-w-md drop-shadow-[0_2px_20px_rgba(0,0,0,0.25)]"
+          />
+          <p className="font-display mt-8 max-w-xl text-2xl italic text-paper md:text-3xl">
+            A living showroom for objects that were always meant to be used,
+            not shelved.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/showroom"
+              className="eyebrow rounded-full bg-paper px-6 py-3 text-ink transition-colors hover:bg-bronze hover:text-paper"
+            >
+              Step Into the Showroom
+            </Link>
+            <Link
+              href="/collection"
+              className="eyebrow rounded-full border border-paper/70 px-6 py-3 text-paper transition-colors hover:border-paper hover:bg-paper/10"
+            >
+              View the Collection
+            </Link>
+          </div>
         </div>
       </section>
 
