@@ -3,9 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { categories, pieces } from "@/data/pieces";
+import { categories, pieces, type Piece } from "@/data/pieces";
 
 const filterOptions = [...categories, "Sold"];
+
+// A small, deterministic rhythm of aspect ratios so the page doesn't
+// read as a uniform grid — each entry gets a slightly different crop,
+// the way a magazine spread varies image sizes without losing order.
+const ratios = ["aspect-[3/4]", "aspect-[4/5]", "aspect-square"];
 
 export default function Collection() {
   const [active, setActive] = useState("All");
@@ -26,9 +31,8 @@ export default function Collection() {
         </h1>
         <p className="mt-5 max-w-xl text-ink-soft">
           Everything here is genuinely in use in Elizabeth Bay until it
-          finds its next home — nothing is held in a warehouse waiting to
-          be photographed. Ask about condition, dimensions, or provenance;
-          we know each piece by hand.
+          finds its next home. Ask about condition, dimensions, or
+          provenance — we know each piece by hand.
         </p>
       </section>
 
@@ -61,60 +65,9 @@ export default function Collection() {
           </p>
         </section>
       ) : (
-        <section className="mx-auto max-w-6xl divide-y divide-line/70 px-6 md:px-10">
+        <section className="mx-auto max-w-6xl px-6 md:px-10">
           {visible.map((p, i) => (
-            <article
-              key={p.slug}
-              className="grid gap-6 py-14 md:grid-cols-2 md:items-center md:gap-16 md:py-20"
-            >
-              <Link
-                href={`/collection/${p.slug}`}
-                className={`relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-paper ${
-                  i % 2 === 1 ? "md:order-2" : ""
-                }`}
-              >
-                <Image
-                  src={p.images[0]}
-                  alt={p.title}
-                  fill
-                  sizes="(min-width: 768px) 45vw, 90vw"
-                  className={`object-cover ${p.sold ? "grayscale" : ""}`}
-                />
-                {p.sold && (
-                  <span className="eyebrow absolute left-4 top-4 rounded-full bg-ink px-3 py-1 text-plaster">
-                    Sold
-                  </span>
-                )}
-              </Link>
-              <div className={i % 2 === 1 ? "md:order-1" : ""}>
-                <p className="eyebrow text-bronze">{p.category}</p>
-                <h2 className="font-display mt-2 text-3xl md:text-4xl">
-                  <Link href={`/collection/${p.slug}`} className="hover:text-bronze">
-                    {p.title}
-                  </Link>
-                </h2>
-                <p className="mt-1 text-ink-soft">{p.era}</p>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft">
-                  {p.note}
-                </p>
-                <div className="mt-6 flex items-center gap-6">
-                  <span
-                    className={`font-mono text-lg ${
-                      p.sold ? "text-ink-soft line-through" : "text-bronze"
-                    }`}
-                  >
-                    {p.price}
-                  </span>
-                  <span className="text-sm text-ink-soft">{p.material}</span>
-                </div>
-                <Link
-                  href={`/collection/${p.slug}`}
-                  className="eyebrow mt-6 inline-block underline decoration-line underline-offset-4 hover:text-bronze"
-                >
-                  {p.sold ? "View Piece →" : "View & Enquire →"}
-                </Link>
-              </div>
-            </article>
+            <PieceRow key={p.slug} piece={p} index={i} />
           ))}
         </section>
       )}
@@ -135,5 +88,65 @@ export default function Collection() {
         </Link>
       </section>
     </>
+  );
+}
+
+function PieceRow({ piece: p, index: i }: { piece: Piece; index: number }) {
+  const ratio = ratios[i % ratios.length];
+
+  return (
+    <article
+      className={`grid gap-6 py-16 md:grid-cols-2 md:items-center md:gap-16 md:py-24 ${
+        i > 0 ? "border-t border-line/60" : ""
+      }`}
+    >
+      <Link
+        href={`/collection/${p.slug}`}
+        className={`group relative block w-full overflow-hidden ${ratio} ${
+          i % 2 === 1 ? "md:order-2" : ""
+        }`}
+      >
+        <Image
+          src={p.images[0]}
+          alt={p.title}
+          fill
+          sizes="(min-width: 768px) 45vw, 90vw"
+          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
+            p.sold ? "grayscale" : ""
+          }`}
+        />
+        {p.sold && (
+          <span className="eyebrow absolute left-4 top-4 rounded-full bg-ink px-3 py-1 text-plaster">
+            Sold
+          </span>
+        )}
+      </Link>
+      <div className={i % 2 === 1 ? "md:order-1" : ""}>
+        <p className="eyebrow text-bronze">{p.category}</p>
+        <h2 className="font-display mt-2 text-3xl md:text-4xl">
+          <Link href={`/collection/${p.slug}`} className="hover:text-bronze">
+            {p.title}
+          </Link>
+        </h2>
+        <p className="mt-1 text-ink-soft">{p.era}</p>
+        <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft">
+          {p.note}
+        </p>
+        <div className="mt-6 flex items-center gap-6">
+          {p.sold ? (
+            <span className="eyebrow text-ink-soft">Sold</span>
+          ) : (
+            <span className="font-mono text-lg text-bronze">{p.price}</span>
+          )}
+          <span className="text-sm text-ink-soft">{p.material}</span>
+        </div>
+        <Link
+          href={`/collection/${p.slug}`}
+          className="eyebrow mt-6 inline-block underline decoration-line underline-offset-4 hover:text-bronze"
+        >
+          {p.sold ? "View Piece →" : "View & Enquire →"}
+        </Link>
+      </div>
+    </article>
   );
 }

@@ -2,122 +2,88 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { pieces } from "@/data/pieces";
 
-type Hotspot = {
-  id: string;
-  label: string;
-  price: string;
-  note: string;
-  top: string;
-  left: string;
-};
-
-const hotspots: Hotspot[] = [
-  {
-    id: "armchair",
-    label: "1960s reading chair",
-    price: "$1,450",
-    note: "Reupholstered once, in the fabric you see now. The one everyone tries first.",
-    top: "62%",
-    left: "45%",
-  },
-  {
-    id: "lamp",
-    label: "Brass table lamp",
-    price: "$320",
-    note: "Rewired to current safety standard, original shade retained.",
-    top: "58%",
-    left: "63%",
-  },
-  {
-    id: "cup",
-    label: "Hand-thrown coffee cup",
-    price: "$45",
-    note: "Part of a set of six — sold individually or together.",
-    top: "68%",
-    left: "76%",
-  },
-  {
-    id: "artwork",
-    label: "Untitled harbour study",
-    price: "$980",
-    note: "Unsigned, found with the frame you see it in.",
-    top: "26%",
-    left: "83%",
-  },
-  {
-    id: "mirror",
-    label: "Oval wall mirror",
-    price: "$560",
-    note: "Foxed glass, original to the frame — we left it as found.",
-    top: "28%",
-    left: "30%",
-  },
+// Every hotspot below points at a real, currently-listed piece — pulled
+// directly from the same data that drives the Collection page. Nothing
+// here is staged or invented; these are simply two pieces from the
+// catalogue that happen to appear in this particular corner of the room.
+const hotspotSlugs: { slug: string; top: string; left: string }[] = [
+  { slug: "octagonal-bamboo-mirror", top: "23%", left: "21%" },
+  { slug: "ceramic-pineapple-lamp", top: "49%", left: "50%" },
 ];
 
 export default function RoomScene() {
   const [active, setActive] = useState<string | null>(null);
 
+  const hotspots = hotspotSlugs
+    .map((h) => {
+      const piece = pieces.find((p) => p.slug === h.slug);
+      return piece ? { ...h, piece } : null;
+    })
+    .filter((h): h is { slug: string; top: string; left: string; piece: (typeof pieces)[number] } => h !== null);
+
+  const activePiece = hotspots.find((h) => h.slug === active)?.piece;
+
   return (
     <div className="relative mx-auto w-full max-w-4xl">
-      <div className="relative w-full overflow-hidden rounded-sm border border-line/70 bg-paper">
+      <div className="relative aspect-[3/4] w-full overflow-hidden md:aspect-[4/5]">
         <Image
-          src="/brand/room-scene.svg"
-          alt="Illustration of the Musetta showroom — an armchair, side table, lamp, cup, artwork, and mirror, each available to enquire about"
-          width={1200}
-          height={760}
-          className="h-auto w-full"
+          src="/collection/mirror-octagon-bamboo.webp"
+          alt="A corner of the Musetta showroom, with the octagonal bamboo mirror and the Bondia table lamp"
+          fill
+          sizes="(min-width: 768px) 800px, 100vw"
+          className="object-cover"
         />
 
         {hotspots.map((h) => (
           <button
-            key={h.id}
+            key={h.slug}
             type="button"
-            onClick={() => setActive(active === h.id ? null : h.id)}
-            onMouseEnter={() => setActive(h.id)}
+            onClick={() => setActive(active === h.slug ? null : h.slug)}
+            onMouseEnter={() => setActive(h.slug)}
             style={{ top: h.top, left: h.left }}
-            className="group absolute -translate-x-1/2 -translate-y-1/2"
-            aria-expanded={active === h.id}
-            aria-label={`${h.label}, ${h.price}`}
+            className="group absolute -translate-x-1/2 -translate-y-1/2 p-3"
+            aria-expanded={active === h.slug}
+            aria-label={`${h.piece.title}, ${h.piece.sold ? "sold" : h.piece.price}`}
           >
-            <span className="block h-3 w-3 rounded-full bg-bordeaux ring-4 ring-bordeaux/20 transition-transform group-hover:scale-125" />
-            <span className="absolute left-1/2 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 animate-ping rounded-full bg-bordeaux/60" />
+            <span className="block h-2.5 w-2.5 rounded-full bg-paper ring-1 ring-ink/40 transition-transform duration-300 group-hover:scale-150" />
           </button>
         ))}
       </div>
 
       {/* Detail card */}
       <div className="mt-6 min-h-[6.5rem] border-t border-line/70 pt-6">
-        {active ? (
-          (() => {
-            const h = hotspots.find((x) => x.id === active)!;
-            return (
-              <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
-                <div>
-                  <h3 className="font-display text-2xl">{h.label}</h3>
-                  <p className="mt-1 max-w-md text-sm text-ink-soft">
-                    {h.note}
-                  </p>
-                </div>
-                <div className="flex shrink-0 items-center gap-4">
-                  <span className="font-mono text-lg text-bronze">
-                    {h.price}
-                  </span>
-                  <a
-                    href="/contact"
-                    className="eyebrow underline decoration-line underline-offset-4 hover:text-bronze"
-                  >
-                    Enquire
-                  </a>
-                </div>
-              </div>
-            );
-          })()
+        {activePiece ? (
+          <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
+            <div>
+              <h3 className="font-display text-2xl">{activePiece.title}</h3>
+              <p className="mt-1 max-w-md text-sm text-ink-soft">
+                {activePiece.era}
+              </p>
+            </div>
+            <div className="flex shrink-0 items-center gap-4">
+              {activePiece.sold ? (
+                <span className="eyebrow text-ink-soft">Sold</span>
+              ) : (
+                <span className="font-mono text-lg text-bronze">
+                  {activePiece.price}
+                </span>
+              )}
+              <Link
+                href={`/collection/${activePiece.slug}`}
+                className="eyebrow underline decoration-line underline-offset-4 hover:text-bronze"
+              >
+                View Piece →
+              </Link>
+            </div>
+          </div>
         ) : (
           <p className="text-sm text-ink-soft">
-            Every marked point in this room is for sale, the same way it
-            would be if you were standing in it. Hover or tap a mark to see
-            what it is.
+            The marked points are real pieces from the current collection,
+            shown exactly where they sit in the room. Hover or tap a mark
+            to see what it is.
           </p>
         )}
       </div>

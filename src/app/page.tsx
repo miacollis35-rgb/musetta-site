@@ -52,46 +52,51 @@ export default function Home() {
         </div>
       </section>
 
-      {/* The idea */}
-      <section className="border-y border-line/70 bg-paper">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-28">
-          <div className="relative aspect-[4/5] w-full overflow-hidden">
+      {/* Full-bleed interior — let the room speak */}
+      <section className="relative aspect-[16/10] w-full md:aspect-[21/9]">
+        <Image
+          src="/collection/room-wide-harbor-2.webp"
+          alt="The Musetta living room, Elizabeth Bay"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <p className="eyebrow absolute bottom-6 left-6 text-paper/90 md:bottom-8 md:left-10">
+          Elizabeth Bay
+        </p>
+      </section>
+
+      {/* What is Musetta — one tight statement */}
+      <section className="bg-paper">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[0.9fr_1.1fr] md:gap-20 md:px-10 md:py-32">
+          <div className="relative aspect-[3/4] w-full overflow-hidden md:-translate-y-6">
             <Image
               src="/collection/corner-console-lamp.webp"
-              alt="A corner of the Musetta showroom in Elizabeth Bay"
+              alt="A corner of the Musetta showroom"
               fill
-              sizes="(min-width: 768px) 45vw, 90vw"
+              sizes="(min-width: 768px) 40vw, 90vw"
               className="object-cover"
             />
           </div>
-          <div className="flex flex-col justify-center">
+          <div>
             <p className="eyebrow text-bronze">What is Musetta?</p>
             <p className="font-display mt-3 text-3xl leading-snug text-ink md:text-4xl">
-              A lived-in gallery, not a showroom you view from behind glass.
+              An apartment, not a shop.
             </p>
-            <p className="mt-6 max-w-lg text-ink-soft">
-              Musetta is an apartment in Elizabeth Bay where art and
-              furniture are experienced as part of everyday life, not
-              displayed at a distance. You come as you would to a
-              friend&rsquo;s home — there&rsquo;s music playing, coffee
-              offered, sometimes champagne. You sit, you talk, you spend
-              time. The pieces in the space are used, lived with, and
-              understood in context: a chair you actually sit in, a sofa
-              you sink into, artworks that reveal themselves slowly.
-            </p>
-            <p className="mt-4 max-w-lg text-ink-soft">
-              Nothing here is forced or transactional. You&rsquo;re welcome
-              to come simply to look, to be inspired, to see how art and
-              design can live together. And if you do choose to take
-              something home, it doesn&rsquo;t feel like shopping — it
-              feels like carrying a piece of a life well lived into your
-              own.
+            <p className="mt-6 max-w-md text-ink-soft">
+              You come as you would to a friend&rsquo;s home — music
+              playing, coffee offered, sometimes champagne. The pieces are
+              used, lived with, understood in context: a chair you
+              actually sit in, artworks that reveal themselves slowly. If
+              you do choose to take something home, it doesn&rsquo;t feel
+              like shopping. It feels like carrying a piece of a life well
+              lived into your own.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Featured pieces */}
+      {/* Selected objects — asymmetric, editorial */}
       <section className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
         <div className="mb-12 flex items-end justify-between gap-6">
           <div>
@@ -108,34 +113,16 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid gap-10 md:grid-cols-3">
-          {featured.map((item) => (
-            <Link
-              key={item.slug}
-              href={`/collection/${item.slug}`}
-              className="group block"
-            >
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-plaster-deep transition-colors group-hover:border-bronze">
-                <Image
-                  src={item.images[0]}
-                  alt={item.title}
-                  fill
-                  sizes="(min-width: 768px) 30vw, 90vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="mt-4 flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-xl group-hover:text-bronze">
-                  {item.title}
-                </h3>
-                <span className="font-mono shrink-0 text-sm text-bronze">
-                  {item.price}
-                </span>
-              </div>
-              <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
-            </Link>
-          ))}
-        </div>
+        {featured.length > 0 && (
+          <div className="grid gap-10 md:grid-cols-2">
+            <PieceCard item={featured[0]} tall />
+            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-1">
+              {featured.slice(1, 3).map((item) => (
+                <PieceCard key={item.slug} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
 
         <Link
           href="/collection"
@@ -145,26 +132,15 @@ export default function Home() {
         </Link>
       </section>
 
-      {/* Interiors */}
-      <section className="bg-plaster-deep">
-        <div className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
-          <p className="eyebrow text-bronze">Interiors</p>
-          <p className="font-display mt-4 text-2xl italic leading-snug text-ink md:text-3xl">
-            Our rooms are crafted to excite and inspire, never to
-            intimidate.
-          </p>
-          <p className="mt-6 text-ink-soft">
-            Each space invites you to dream and be swept up in its charm —
-            much like an encounter with Musetta herself. We balance
-            sophistication with warmth, where every corner tells a story
-            and every piece has purpose. This isn&rsquo;t a showroom that
-            simply displays exceptional design; it demonstrates how
-            extraordinary objects enhance the rhythm and beauty of
-            everyday life. Here, you&rsquo;re not merely observing design
-            — you&rsquo;re experiencing how it transforms a room into a
-            sanctuary of self-expression and artistic dialogue.
-          </p>
-        </div>
+      {/* Full-bleed interior */}
+      <section className="relative aspect-[4/5] w-full md:aspect-[16/9]">
+        <Image
+          src="/collection/corner-art-suzani.webp"
+          alt="Art and a Suzani armchair in the Musetta showroom"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
       </section>
 
       {/* Hosted dinners */}
@@ -187,17 +163,10 @@ export default function Home() {
             </h2>
             <p className="mt-6 max-w-lg text-plaster/85">
               A handful of evenings each season, the showroom becomes a
-              dinner table. Small parties, a menu built around the season,
-              and a room full of pieces you&rsquo;re welcome to ask about
+              dinner table and a cocktail hour turns the viewing into a
+              soirée. Small parties, a menu built around the season, and a
+              room full of pieces you&rsquo;re welcome to ask about
               between courses.
-            </p>
-            <p className="mt-4 max-w-lg text-plaster/85">
-              The cocktail hour that opens each evening turns a viewing
-              into a soirée. As guests move through the rooms, drink in
-              hand, they engage with design in its most natural state —
-              appreciation happens organically, and each piece becomes
-              part of an evening to remember rather than an object to
-              observe.
             </p>
             <div className="mt-8 flex flex-col gap-4 border-t border-plaster/25 pt-8">
               <p className="font-mono text-sm text-plaster/70">
@@ -216,27 +185,65 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Lifestyle */}
-      <section className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
-        <p className="eyebrow text-bronze">Lifestyle</p>
-        <h2 className="font-display mt-3 text-3xl md:text-4xl">
-          Art and design, encountered through living
+      {/* Closing / visit */}
+      <section className="mx-auto max-w-2xl px-6 py-20 text-center md:py-28">
+        <h2 className="font-display text-3xl md:text-4xl">
+          Come and see for yourself
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          An armchair holds a quiet morning. A dining table carries
-          celebration and conversation. By seeing pieces used as
-          they&rsquo;re meant to be, you come to recognise what resonates
-          with your own way of living, rather than what simply looks
-          good — all in a corner of Elizabeth Bay you&rsquo;re welcome to
-          visit for yourself.
+        <p className="mx-auto mt-5 max-w-md text-ink-soft">
+          Viewings are by private appointment in Elizabeth Bay. No
+          obligation to buy anything — you&rsquo;re welcome to sit down.
         </p>
-        <Link
-          href="/showroom"
-          className="eyebrow mt-8 inline-block rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
-        >
-          Step Into the Showroom
-        </Link>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/showroom"
+            className="eyebrow rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
+          >
+            Step Into the Showroom
+          </Link>
+          <Link
+            href="/contact"
+            className="eyebrow rounded-full border border-ink px-6 py-3 transition-colors hover:border-bronze hover:text-bronze"
+          >
+            Request a Viewing
+          </Link>
+        </div>
       </section>
     </>
+  );
+}
+
+function PieceCard({
+  item,
+  tall,
+}: {
+  item: (typeof pieces)[number];
+  tall?: boolean;
+}) {
+  return (
+    <Link href={`/collection/${item.slug}`} className="group block">
+      <div
+        className={`relative w-full overflow-hidden ${
+          tall ? "aspect-[3/4]" : "aspect-[4/5]"
+        }`}
+      >
+        <Image
+          src={item.images[0]}
+          alt={item.title}
+          fill
+          sizes="(min-width: 768px) 35vw, 90vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      </div>
+      <div className="mt-4 flex items-baseline justify-between gap-4">
+        <h3 className="font-display text-xl group-hover:text-bronze">
+          {item.title}
+        </h3>
+        <span className="font-mono shrink-0 text-sm text-bronze">
+          {item.price}
+        </span>
+      </div>
+      <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
+    </Link>
   );
 }

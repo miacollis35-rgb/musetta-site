@@ -47,27 +47,26 @@ export default async function PiecePage({
         </Link>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-10 px-6 py-10 md:grid-cols-2 md:gap-16 md:px-10 md:py-14">
+      <section className="mx-auto grid max-w-6xl gap-12 px-6 py-10 md:grid-cols-[1.1fr_0.9fr] md:gap-16 md:px-10 md:py-14">
         <PieceGallery images={piece.images} title={piece.title} sold={piece.sold} />
 
-        <div>
+        <div className="md:pt-4">
           <p className="eyebrow text-bronze">{piece.category}</p>
           <h1 className="font-display mt-2 text-4xl md:text-5xl">{piece.title}</h1>
           <p className="mt-2 text-ink-soft">{piece.era}</p>
 
-          <p className="mt-6 max-w-md leading-relaxed text-ink-soft">{piece.note}</p>
-
-          <div className="mt-8 flex items-center gap-6 border-t border-line/70 pt-6">
-            <span
-              className={`font-mono text-2xl ${
-                piece.sold ? "text-ink-soft line-through" : "text-bronze"
-              }`}
-            >
-              {piece.price}
-            </span>
-            {piece.sold && <span className="eyebrow text-ink-soft">Sold</span>}
+          <div className="mt-8 flex items-baseline gap-6">
+            {piece.sold ? (
+              <span className="eyebrow text-ink-soft">Sold</span>
+            ) : (
+              <span className="font-mono text-2xl text-bronze">{piece.price}</span>
+            )}
           </div>
-          <p className="mt-2 text-sm text-ink-soft">{piece.material}</p>
+
+          <p className="mt-6 max-w-md leading-relaxed text-ink-soft">{piece.note}</p>
+          <p className="mt-4 border-t border-line/60 pt-4 text-sm text-ink-soft">
+            {piece.material}
+          </p>
 
           {piece.sold ? (
             <p className="mt-8 max-w-sm text-sm text-ink-soft">
@@ -86,13 +85,13 @@ export default async function PiecePage({
       </section>
 
       {related.length > 0 && (
-        <section className="border-t border-line/70 bg-paper">
+        <section className="border-t border-line/60 bg-paper">
           <div className="mx-auto max-w-6xl px-6 py-16 md:px-10 md:py-20">
             <p className="eyebrow text-bronze">More {piece.category}</p>
             <div className="mt-8 grid gap-10 md:grid-cols-3">
               {related.map((r) => (
                 <Link key={r.slug} href={`/collection/${r.slug}`} className="group">
-                  <div className="relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-plaster-deep">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
                     <Image
                       src={r.images[0]}
                       alt={r.title}
@@ -104,14 +103,14 @@ export default async function PiecePage({
                     />
                   </div>
                   <div className="mt-4 flex items-baseline justify-between gap-4">
-                    <h3 className="font-display text-xl">{r.title}</h3>
-                    <span
-                      className={`font-mono shrink-0 text-sm ${
-                        r.sold ? "text-ink-soft line-through" : "text-bronze"
-                      }`}
-                    >
-                      {r.price}
-                    </span>
+                    <h3 className="font-display text-xl group-hover:text-bronze">{r.title}</h3>
+                    {r.sold ? (
+                      <span className="eyebrow shrink-0 text-ink-soft">Sold</span>
+                    ) : (
+                      <span className="font-mono shrink-0 text-sm text-bronze">
+                        {r.price}
+                      </span>
+                    )}
                   </div>
                 </Link>
               ))}

@@ -16,7 +16,7 @@ export default function PieceGallery({
 
   return (
     <div>
-      <div className="relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-paper">
+      <div className="relative aspect-[4/5] w-full overflow-hidden bg-paper">
         <Image
           src={images[active]}
           alt={`${title}${images.length > 1 ? ` — photo ${active + 1}` : ""}`}
@@ -41,8 +41,8 @@ export default function PieceGallery({
               onClick={() => setActive(i)}
               aria-label={`Show photo ${i + 1}`}
               aria-pressed={active === i}
-              className={`relative aspect-square overflow-hidden border transition-colors ${
-                active === i ? "border-bronze" : "border-line/70 hover:border-ink-soft"
+              className={`relative aspect-square overflow-hidden transition-opacity ${
+                active === i ? "opacity-100 ring-1 ring-bronze" : "opacity-60 hover:opacity-100"
               }`}
             >
               <Image
