@@ -1,26 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { pieces } from "@/data/pieces";
 
-const featured = [
-  {
-    title: "Bessarabian kilim",
-    note: "Early 20th century, hand-woven wool",
-    price: "$2,600",
-    image: "/collection/kilim.webp",
-  },
-  {
-    title: "Chinese blue & white ginger jar",
-    note: "Kangxi-style, 19th century",
-    price: "$980",
-    image: "/collection/ginger-jar.webp",
-  },
-  {
-    title: "Octagonal chinoiserie mirror",
-    note: "Japonisme revival, early 20th c.",
-    price: "$3,400",
-    image: "/collection/mirror-chinoiserie.webp",
-  },
-];
+const featured = pieces.filter((p) => !p.sold).slice(0, 3);
 
 export default function Home() {
   return (
@@ -120,10 +102,14 @@ export default function Home() {
 
         <div className="grid gap-10 md:grid-cols-3">
           {featured.map((item) => (
-            <div key={item.title} className="group">
+            <Link
+              key={item.slug}
+              href={`/collection/${item.slug}`}
+              className="group block"
+            >
               <div className="relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-plaster-deep transition-colors group-hover:border-bronze">
                 <Image
-                  src={item.image}
+                  src={item.images[0]}
                   alt={item.title}
                   fill
                   sizes="(min-width: 768px) 30vw, 90vw"
@@ -131,13 +117,15 @@ export default function Home() {
                 />
               </div>
               <div className="mt-4 flex items-baseline justify-between gap-4">
-                <h3 className="font-display text-xl">{item.title}</h3>
+                <h3 className="font-display text-xl group-hover:text-bronze">
+                  {item.title}
+                </h3>
                 <span className="font-mono shrink-0 text-sm text-bronze">
                   {item.price}
                 </span>
               </div>
               <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
-            </div>
+            </Link>
           ))}
         </div>
 

@@ -1,84 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { categories, pieces } from "@/data/pieces";
 
-const categories = ["All", "Furniture", "Textiles", "Ceramics", "Lighting", "Objects"];
-
-const pieces = [
-  {
-    title: "Bessarabian kilim",
-    era: "Early 20th century",
-    material: "260 × 310cm, hand-woven wool",
-    price: "$2,600",
-    category: "Textiles",
-    image: "/collection/kilim.webp",
-    note: "Excellent condition for its age. Colours have softened to a dust-rose and ochre that photographs slightly warmer than in person.",
-  },
-  {
-    title: "Chinese blue & white ginger jar",
-    era: "19th century, Kangxi-style",
-    material: "Porcelain, fitted lid",
-    price: "$980",
-    category: "Ceramics",
-    image: "/collection/ginger-jar.webp",
-    note: "Found at a Sydney estate sale, provenance unclear beyond the last owner. No chips, one hairline glaze crackle to the base.",
-  },
-  {
-    title: "Octagonal chinoiserie mirror",
-    era: "Japonisme revival, early 20th c.",
-    material: "130 × 100cm, hand-decorated gilt frame",
-    price: "$3,400",
-    category: "Objects",
-    image: "/collection/mirror-chinoiserie.webp",
-    note: "Birds and foliage decoration to the frame, hand-painted. Mirror plate has light foxing at the edges, original to the piece.",
-  },
-  {
-    title: "Chinese red lacquer cabinet",
-    era: "Mid-20th century",
-    material: "Lacquered hardwood, brass fittings",
-    price: "$3,800",
-    category: "Furniture",
-    image: "/collection/cabinet-red-lacquer.webp",
-    note: "Hand-painted landscape scenes to both doors, original circular brass lock plate. Currently doing double duty as a bar cabinet.",
-  },
-  {
-    title: "Giltwood bamboo-form mirror",
-    era: "20th century",
-    material: "Carved giltwood, faux-bamboo moulding",
-    price: "$890",
-    category: "Objects",
-    image: "/collection/mirror-bamboo.webp",
-    note: "Light gilt wear at the high points of the moulding, which we think only helps it. Hangs either orientation.",
-  },
-  {
-    title: "Ceramic pineapple table lamp",
-    era: "20th century",
-    material: "Glazed ceramic, linen shade",
-    price: "$620",
-    category: "Lighting",
-    image: "/collection/lamp-pineapple.webp",
-    note: "Rewired and tested. The shade is original — a little sun-warmed at one edge, barely visible once lit.",
-  },
-  {
-    title: "Set of six oak dining chairs",
-    era: "Mid-20th century",
-    material: "Solid oak, striped upholstery",
-    price: "$2,100",
-    category: "Furniture",
-    image: "/collection/dining-chairs.webp",
-    note: "Sold as a set of six. Upholstery is a later reupholster in good condition; frames are original and sturdy.",
-  },
-  {
-    title: "Octagonal bamboo mirror",
-    era: "20th century",
-    material: "Bamboo frame",
-    price: "$450",
-    category: "Objects",
-    image: "/collection/mirror-octagon-bamboo.webp",
-    note: "Simple and unfussy — pairs well with almost anything. One small age crack to the frame, stable and not worsening.",
-  },
-];
+const filterOptions = [...categories, "Sold"];
 
 export default function Collection() {
+  const [active, setActive] = useState("All");
+
+  const visible =
+    active === "All"
+      ? pieces
+      : active === "Sold"
+      ? pieces.filter((p) => p.sold)
+      : pieces.filter((p) => p.category === active && !p.sold);
+
   return (
     <>
       <section className="mx-auto max-w-6xl px-6 pb-10 pt-16 md:px-10 md:pt-20">
@@ -99,63 +37,87 @@ export default function Collection() {
         className="sticky top-[73px] z-40 border-y border-line/70 bg-plaster/95 backdrop-blur"
       >
         <div className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-2 px-6 py-4 md:px-10">
-          {categories.map((c) => (
-            <span
+          {filterOptions.map((c) => (
+            <button
               key={c}
-              className={`eyebrow cursor-default ${
-                c === "All" ? "text-bronze" : "text-ink-soft"
+              type="button"
+              onClick={() => setActive(c)}
+              aria-pressed={active === c}
+              className={`eyebrow transition-colors hover:text-bronze ${
+                active === c ? "text-bronze" : "text-ink-soft"
               }`}
             >
               {c}
-            </span>
+            </button>
           ))}
         </div>
       </nav>
 
-      <section className="mx-auto max-w-6xl divide-y divide-line/70 px-6 md:px-10">
-        {pieces.map((p, i) => (
-          <article
-            key={p.title}
-            className="grid gap-6 py-14 md:grid-cols-2 md:items-center md:gap-16 md:py-20"
-          >
-            <div
-              className={`relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-paper ${
-                i % 2 === 1 ? "md:order-2" : ""
-              }`}
+      {visible.length === 0 ? (
+        <section className="mx-auto max-w-6xl px-6 py-20 text-center md:px-10">
+          <p className="text-ink-soft">
+            Nothing in this category right now — check back soon, or ask us
+            to keep an eye out.
+          </p>
+        </section>
+      ) : (
+        <section className="mx-auto max-w-6xl divide-y divide-line/70 px-6 md:px-10">
+          {visible.map((p, i) => (
+            <article
+              key={p.slug}
+              className="grid gap-6 py-14 md:grid-cols-2 md:items-center md:gap-16 md:py-20"
             >
-              <Image
-                src={p.image}
-                alt={p.title}
-                fill
-                sizes="(min-width: 768px) 45vw, 90vw"
-                className="object-cover"
-              />
-            </div>
-            <div className={i % 2 === 1 ? "md:order-1" : ""}>
-              <p className="eyebrow text-bronze">{p.category}</p>
-              <h2 className="font-display mt-2 text-3xl md:text-4xl">
-                {p.title}
-              </h2>
-              <p className="mt-1 text-ink-soft">{p.era}</p>
-              <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft">
-                {p.note}
-              </p>
-              <div className="mt-6 flex items-center gap-6">
-                <span className="font-mono text-lg text-bronze">
-                  {p.price}
-                </span>
-                <span className="text-sm text-ink-soft">{p.material}</span>
-              </div>
               <Link
-                href="/contact"
-                className="eyebrow mt-6 inline-block underline decoration-line underline-offset-4 hover:text-bronze"
+                href={`/collection/${p.slug}`}
+                className={`relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-paper ${
+                  i % 2 === 1 ? "md:order-2" : ""
+                }`}
               >
-                Ask About This Piece →
+                <Image
+                  src={p.images[0]}
+                  alt={p.title}
+                  fill
+                  sizes="(min-width: 768px) 45vw, 90vw"
+                  className={`object-cover ${p.sold ? "grayscale" : ""}`}
+                />
+                {p.sold && (
+                  <span className="eyebrow absolute left-4 top-4 rounded-full bg-ink px-3 py-1 text-plaster">
+                    Sold
+                  </span>
+                )}
               </Link>
-            </div>
-          </article>
-        ))}
-      </section>
+              <div className={i % 2 === 1 ? "md:order-1" : ""}>
+                <p className="eyebrow text-bronze">{p.category}</p>
+                <h2 className="font-display mt-2 text-3xl md:text-4xl">
+                  <Link href={`/collection/${p.slug}`} className="hover:text-bronze">
+                    {p.title}
+                  </Link>
+                </h2>
+                <p className="mt-1 text-ink-soft">{p.era}</p>
+                <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft">
+                  {p.note}
+                </p>
+                <div className="mt-6 flex items-center gap-6">
+                  <span
+                    className={`font-mono text-lg ${
+                      p.sold ? "text-ink-soft line-through" : "text-bronze"
+                    }`}
+                  >
+                    {p.price}
+                  </span>
+                  <span className="text-sm text-ink-soft">{p.material}</span>
+                </div>
+                <Link
+                  href={`/collection/${p.slug}`}
+                  className="eyebrow mt-6 inline-block underline decoration-line underline-offset-4 hover:text-bronze"
+                >
+                  {p.sold ? "View Piece →" : "View & Enquire →"}
+                </Link>
+              </div>
+            </article>
+          ))}
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-6 py-20 text-center md:py-28">
         <p className="font-display text-2xl italic text-ink-soft md:text-3xl">
