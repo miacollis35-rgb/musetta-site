@@ -52,20 +52,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Full-bleed interior — let the room speak */}
-      <section className="relative aspect-[16/10] w-full md:aspect-[21/9]">
-        <Image
-          src="/collection/room-wide-harbor-2.webp"
-          alt="The Musetta living room, Elizabeth Bay"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-        <p className="eyebrow absolute bottom-6 left-6 text-paper/90 md:bottom-8 md:left-10">
-          Elizabeth Bay
-        </p>
-      </section>
-
       {/* What is Musetta — one tight statement */}
       <section className="bg-paper">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[0.9fr_1.1fr] md:gap-20 md:px-10 md:py-32">
@@ -130,17 +116,6 @@ export default function Home() {
         >
           Full Collection →
         </Link>
-      </section>
-
-      {/* Full-bleed interior */}
-      <section className="relative aspect-[4/5] w-full md:aspect-[16/9]">
-        <Image
-          src="/collection/corner-art-suzani.webp"
-          alt="Art and a Suzani armchair in the Musetta showroom"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
       </section>
 
       {/* Hosted dinners */}

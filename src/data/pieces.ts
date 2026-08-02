@@ -16,6 +16,8 @@ export const categories = [
   "Textiles",
   "Ceramics",
   "Lighting",
+  "Mirrors",
+  "Art",
   "Objects",
 ];
 
@@ -61,7 +63,7 @@ export const pieces: Piece[] = [
     era: "Japonisme revival, early 20th c.",
     material: "130 × 100cm, hand-decorated gilt frame",
     price: "$3,000",
-    category: "Objects",
+    category: "Mirrors",
     sold: false,
     images: [
       "/collection/mirror-chinoiserie.webp",
@@ -95,7 +97,7 @@ export const pieces: Piece[] = [
     era: "20th century",
     material: "Carved giltwood, faux-bamboo moulding",
     price: "$550",
-    category: "Objects",
+    category: "Mirrors",
     sold: false,
     images: [
       "/collection/mirror-bamboo.webp",
@@ -151,7 +153,7 @@ export const pieces: Piece[] = [
     era: "20th century",
     material: "Bamboo frame",
     price: "$500",
-    category: "Objects",
+    category: "Mirrors",
     sold: true,
     images: ["/collection/mirror-octagon-bamboo.webp"],
     note: "Simple and unfussy — pairs well with almost anything. One small age crack to the frame, stable and not worsening.",
@@ -162,7 +164,7 @@ export const pieces: Piece[] = [
     era: "1960s",
     material: "46 × 37cm, Murano glass mosaic frame",
     price: "$650",
-    category: "Objects",
+    category: "Mirrors",
     sold: false,
     images: [
       "/collection/murano-mirror-1.webp",
@@ -176,7 +178,7 @@ export const pieces: Piece[] = [
     era: "Circa 1950s",
     material: "80 × 60cm, giltwood frame with mirrored panel inlay",
     price: "$450",
-    category: "Objects",
+    category: "Mirrors",
     sold: false,
     images: [
       "/collection/regency-mirror-1.webp",
