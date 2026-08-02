@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import RoomScene from "@/components/RoomScene";
+import ShowroomCarousel from "@/components/ShowroomCarousel";
 
 export default function Showroom() {
   return (
@@ -18,7 +18,7 @@ export default function Showroom() {
       </section>
 
       <section className="px-6 py-14 md:py-20">
-        <RoomScene />
+        <ShowroomCarousel />
       </section>
 
       <section className="bg-paper">
