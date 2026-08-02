@@ -17,12 +17,12 @@ export default function About() {
       </section>
 
       <section className="px-6 py-14 md:py-20">
-        <div className="relative mx-auto aspect-[3/4] w-full max-w-2xl overflow-hidden md:aspect-[16/9] md:max-w-5xl">
+        <div className="relative mx-auto aspect-[3/4] w-full max-w-xl overflow-hidden">
           <Image
-            src="/about/balcony-harbor.webp"
+            src="/about/harbour-terrace.webp"
             alt="The harbour view from the Musetta balcony, Elizabeth Bay"
             fill
-            sizes="(min-width: 768px) 1000px, 100vw"
+            sizes="(min-width: 768px) 576px, 100vw"
             className="object-cover"
           />
         </div>
