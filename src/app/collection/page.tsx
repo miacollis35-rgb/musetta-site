@@ -1,31 +1,26 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const categories = ["All", "Furniture", "Textiles", "Ceramics", "Lighting", "Objects"];
 
 const pieces = [
   {
-    title: "French armoire",
-    era: "c. 1860, Normandy",
-    material: "Walnut, original iron fittings, key present",
-    price: "$4,200",
-    category: "Furniture",
-    note: "Two doors have the original glass; the third was replaced sometime mid-century and shows a faint waver we've left alone.",
-  },
-  {
-    title: "Chinese blue & white ginger jar",
-    era: "19th century, Kangxi-style",
-    material: "Porcelain, fitted wooden lid",
-    price: "$980",
-    category: "Ceramics",
-    note: "Found at a Sydney estate sale, provenance unclear beyond the last owner. No chips, one hairline glaze crackle to the base.",
-  },
-  {
     title: "Bessarabian kilim",
     era: "Early 20th century",
     material: "260 × 310cm, hand-woven wool",
     price: "$2,600",
     category: "Textiles",
+    image: "/collection/kilim.webp",
     note: "Excellent condition for its age. Colours have softened to a dust-rose and ochre that photographs slightly warmer than in person.",
+  },
+  {
+    title: "Chinese blue & white ginger jar",
+    era: "19th century, Kangxi-style",
+    material: "Porcelain, fitted lid",
+    price: "$980",
+    category: "Ceramics",
+    image: "/collection/ginger-jar.webp",
+    note: "Found at a Sydney estate sale, provenance unclear beyond the last owner. No chips, one hairline glaze crackle to the base.",
   },
   {
     title: "Octagonal chinoiserie mirror",
@@ -33,23 +28,53 @@ const pieces = [
     material: "130 × 100cm, hand-decorated gilt frame",
     price: "$3,400",
     category: "Objects",
+    image: "/collection/mirror-chinoiserie.webp",
     note: "Birds and foliage decoration to the frame, hand-painted. Mirror plate has light foxing at the edges, original to the piece.",
   },
   {
-    title: "Colonial watercolour, W.H. Raworth",
-    era: "19th century",
-    material: "Framed, glazed",
-    price: "$1,650",
-    category: "Objects",
-    note: "A harbourside scene, signed lower right. Frame is a later, sympathetic replacement.",
+    title: "Chinese red lacquer cabinet",
+    era: "Mid-20th century",
+    material: "Lacquered hardwood, brass fittings",
+    price: "$3,800",
+    category: "Furniture",
+    image: "/collection/cabinet-red-lacquer.webp",
+    note: "Hand-painted landscape scenes to both doors, original circular brass lock plate. Currently doing double duty as a bar cabinet.",
   },
   {
-    title: "Chinese hardwood drum stool",
-    era: "Openwork barrel form",
-    material: "Carved hardwood",
-    price: "$1,100",
+    title: "Giltwood bamboo-form mirror",
+    era: "20th century",
+    material: "Carved giltwood, faux-bamboo moulding",
+    price: "$890",
+    category: "Objects",
+    image: "/collection/mirror-bamboo.webp",
+    note: "Light gilt wear at the high points of the moulding, which we think only helps it. Hangs either orientation.",
+  },
+  {
+    title: "Ceramic pineapple table lamp",
+    era: "20th century",
+    material: "Glazed ceramic, linen shade",
+    price: "$620",
+    category: "Lighting",
+    image: "/collection/lamp-pineapple.webp",
+    note: "Rewired and tested. The shade is original — a little sun-warmed at one edge, barely visible once lit.",
+  },
+  {
+    title: "Set of six oak dining chairs",
+    era: "Mid-20th century",
+    material: "Solid oak, striped upholstery",
+    price: "$2,100",
     category: "Furniture",
-    note: "Sturdy enough for daily use — this one currently lives by our fireplace, which is the point.",
+    image: "/collection/dining-chairs.webp",
+    note: "Sold as a set of six. Upholstery is a later reupholster in good condition; frames are original and sturdy.",
+  },
+  {
+    title: "Octagonal bamboo mirror",
+    era: "20th century",
+    material: "Bamboo frame",
+    price: "$450",
+    category: "Objects",
+    image: "/collection/mirror-octagon-bamboo.webp",
+    note: "Simple and unfussy — pairs well with almost anything. One small age crack to the frame, stable and not worsening.",
   },
 ];
 
@@ -94,11 +119,18 @@ export default function Collection() {
             className="grid gap-6 py-14 md:grid-cols-2 md:items-center md:gap-16 md:py-20"
           >
             <div
-              className={`aspect-[4/5] w-full border border-line/70 bg-paper ${
+              className={`relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-paper ${
                 i % 2 === 1 ? "md:order-2" : ""
               }`}
-              aria-hidden
-            />
+            >
+              <Image
+                src={p.image}
+                alt={p.title}
+                fill
+                sizes="(min-width: 768px) 45vw, 90vw"
+                className="object-cover"
+              />
+            </div>
             <div className={i % 2 === 1 ? "md:order-1" : ""}>
               <p className="eyebrow text-bronze">{p.category}</p>
               <h2 className="font-display mt-2 text-3xl md:text-4xl">

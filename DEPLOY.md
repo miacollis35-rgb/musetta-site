@@ -18,14 +18,12 @@ haven't already.
    - GitHub will show you a page with some commands — keep that tab open,
      you'll need the repository URL from it in step 4.
 
-**3. Open a terminal, go into the project folder, and turn it into a git
-repository:**
+**3. Open a terminal and go into the project folder.** It already comes
+as an initialized git repository with one commit, so there's no `git init`
+needed — just rename the branch to `main` (GitHub's default):
 
    ```bash
    cd path/to/musetta-site
-   git init
-   git add .
-   git commit -m "Initial commit — Musetta site"
    git branch -M main
    ```
 

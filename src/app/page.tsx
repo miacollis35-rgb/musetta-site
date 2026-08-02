@@ -3,19 +3,22 @@ import Link from "next/link";
 
 const featured = [
   {
-    title: "French armoire, c. 1860",
-    note: "Walnut, original iron fittings",
-    price: "$4,200",
+    title: "Bessarabian kilim",
+    note: "Early 20th century, hand-woven wool",
+    price: "$2,600",
+    image: "/collection/kilim.webp",
   },
   {
     title: "Chinese blue & white ginger jar",
     note: "Kangxi-style, 19th century",
     price: "$980",
+    image: "/collection/ginger-jar.webp",
   },
   {
-    title: "Bessarabian kilim",
-    note: "260 × 310cm, hand-woven wool",
-    price: "$2,600",
+    title: "Octagonal chinoiserie mirror",
+    note: "Japonisme revival, early 20th c.",
+    price: "$3,400",
+    image: "/collection/mirror-chinoiserie.webp",
   },
 ];
 
@@ -57,16 +60,23 @@ export default function Home() {
 
       {/* The idea */}
       <section className="border-y border-line/70 bg-paper">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[1fr_1.3fr] md:gap-16 md:px-10 md:py-28">
-          <div>
-            <p className="eyebrow text-bronze">The Idea</p>
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-28">
+          <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <Image
+              src="/collection/corner-console-lamp.webp"
+              alt="A corner of the Musetta showroom in Elizabeth Bay"
+              fill
+              sizes="(min-width: 768px) 45vw, 90vw"
+              className="object-cover"
+            />
           </div>
-          <div>
-            <p className="font-display text-3xl leading-snug text-ink md:text-4xl">
+          <div className="flex flex-col justify-center">
+            <p className="eyebrow text-bronze">The Idea</p>
+            <p className="font-display mt-3 text-3xl leading-snug text-ink md:text-4xl">
               Most galleries put a piece behind glass and call that respect.
               We think a chair wants to be sat in.
             </p>
-            <p className="mt-6 max-w-2xl text-ink-soft">
+            <p className="mt-6 max-w-lg text-ink-soft">
               Musetta began as a rejection of the white cube: the sterile
               grid of stock photography and price tags that flattens every
               object into the same catalogue page. Instead, our showroom is a
@@ -97,14 +107,17 @@ export default function Home() {
         </div>
 
         <div className="grid gap-10 md:grid-cols-3">
-          {featured.map((item, i) => (
+          {featured.map((item) => (
             <div key={item.title} className="group">
-              <div
-                className={`aspect-[4/5] w-full border border-line/70 bg-plaster-deep transition-colors group-hover:border-bronze ${
-                  i === 1 ? "md:translate-y-8" : ""
-                }`}
-                aria-hidden
-              />
+              <div className="relative aspect-[4/5] w-full overflow-hidden border border-line/70 bg-plaster-deep transition-colors group-hover:border-bronze">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  sizes="(min-width: 768px) 30vw, 90vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
               <div className="mt-4 flex items-baseline justify-between gap-4">
                 <h3 className="font-display text-xl">{item.title}</h3>
                 <span className="font-mono shrink-0 text-sm text-bronze">
@@ -126,8 +139,17 @@ export default function Home() {
 
       {/* Hosted dinners */}
       <section className="bg-bordeaux text-plaster">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[1.3fr_1fr] md:gap-16 md:px-10 md:py-28">
-          <div>
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-28">
+          <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <Image
+              src="/collection/dining-chairs.webp"
+              alt="Dining chairs set for a hosted evening at the Musetta showroom"
+              fill
+              sizes="(min-width: 768px) 45vw, 90vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center">
             <p className="eyebrow text-rose">Hosted Dinners</p>
             <h2 className="font-display mt-3 text-3xl leading-snug md:text-4xl">
               The table is set with what&rsquo;s in the room — and everything
@@ -139,19 +161,19 @@ export default function Home() {
               and a room full of pieces you&rsquo;re welcome to ask about
               between courses.
             </p>
-          </div>
-          <div className="flex flex-col justify-center gap-4 border-t border-plaster/25 pt-8 md:border-l md:border-t-0 md:pl-16 md:pt-0">
-            <p className="font-mono text-sm text-plaster/70">
-              Next evening
-              <br />
-              <span className="text-plaster">Sydney — dates by enquiry</span>
-            </p>
-            <Link
-              href="/contact"
-              className="eyebrow mt-2 w-fit rounded-full border border-plaster/60 px-6 py-3 transition-colors hover:border-plaster hover:bg-plaster hover:text-bordeaux"
-            >
-              Request an Invitation
-            </Link>
+            <div className="mt-8 flex flex-col gap-4 border-t border-plaster/25 pt-8">
+              <p className="font-mono text-sm text-plaster/70">
+                Next evening
+                <br />
+                <span className="text-plaster">Sydney — dates by enquiry</span>
+              </p>
+              <Link
+                href="/contact"
+                className="eyebrow mt-2 w-fit rounded-full border border-plaster/60 px-6 py-3 transition-colors hover:border-plaster hover:bg-plaster hover:text-bordeaux"
+              >
+                Request an Invitation
+              </Link>
+            </div>
           </div>
         </div>
       </section>
