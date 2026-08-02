@@ -21,7 +21,7 @@ export default function Home() {
 
         <div className="relative flex flex-col items-center">
           <p className="eyebrow text-paper/90">
-            Antiques &middot; Hosted Dinners &middot; Paris
+            Antiques &middot; Hosted Dinners &middot; Elizabeth Bay
           </p>
           <Image
             src="/brand/musetta-logo-full-transparent.png"
@@ -65,19 +65,27 @@ export default function Home() {
             />
           </div>
           <div className="flex flex-col justify-center">
-            <p className="eyebrow text-bronze">The Idea</p>
+            <p className="eyebrow text-bronze">What is Musetta?</p>
             <p className="font-display mt-3 text-3xl leading-snug text-ink md:text-4xl">
-              Most galleries put a piece behind glass and call that respect.
-              We think a chair wants to be sat in.
+              A lived-in gallery, not a showroom you view from behind glass.
             </p>
             <p className="mt-6 max-w-lg text-ink-soft">
-              Musetta began as a rejection of the white cube: the sterile
-              grid of stock photography and price tags that flattens every
-              object into the same catalogue page. Instead, our showroom is a
-              lived-in apartment — nearly everything in it, down to the cup
-              you drink from and the table you set it on, is for sale. You
-              meet each piece the way you would in a friend&rsquo;s home:
-              in use, in context, in conversation.
+              Musetta is an apartment in Elizabeth Bay where art and
+              furniture are experienced as part of everyday life, not
+              displayed at a distance. You come as you would to a
+              friend&rsquo;s home — there&rsquo;s music playing, coffee
+              offered, sometimes champagne. You sit, you talk, you spend
+              time. The pieces in the space are used, lived with, and
+              understood in context: a chair you actually sit in, a sofa
+              you sink into, artworks that reveal themselves slowly.
+            </p>
+            <p className="mt-4 max-w-lg text-ink-soft">
+              Nothing here is forced or transactional. You&rsquo;re welcome
+              to come simply to look, to be inspired, to see how art and
+              design can live together. And if you do choose to take
+              something home, it doesn&rsquo;t feel like shopping — it
+              feels like carrying a piece of a life well lived into your
+              own.
             </p>
           </div>
         </div>
@@ -137,6 +145,28 @@ export default function Home() {
         </Link>
       </section>
 
+      {/* Interiors */}
+      <section className="bg-plaster-deep">
+        <div className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
+          <p className="eyebrow text-bronze">Interiors</p>
+          <p className="font-display mt-4 text-2xl italic leading-snug text-ink md:text-3xl">
+            Our rooms are crafted to excite and inspire, never to
+            intimidate.
+          </p>
+          <p className="mt-6 text-ink-soft">
+            Each space invites you to dream and be swept up in its charm —
+            much like an encounter with Musetta herself. We balance
+            sophistication with warmth, where every corner tells a story
+            and every piece has purpose. This isn&rsquo;t a showroom that
+            simply displays exceptional design; it demonstrates how
+            extraordinary objects enhance the rhythm and beauty of
+            everyday life. Here, you&rsquo;re not merely observing design
+            — you&rsquo;re experiencing how it transforms a room into a
+            sanctuary of self-expression and artistic dialogue.
+          </p>
+        </div>
+      </section>
+
       {/* Hosted dinners */}
       <section className="bg-bordeaux text-plaster">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-28">
@@ -161,6 +191,14 @@ export default function Home() {
               and a room full of pieces you&rsquo;re welcome to ask about
               between courses.
             </p>
+            <p className="mt-4 max-w-lg text-plaster/85">
+              The cocktail hour that opens each evening turns a viewing
+              into a soirée. As guests move through the rooms, drink in
+              hand, they engage with design in its most natural state —
+              appreciation happens organically, and each piece becomes
+              part of an evening to remember rather than an object to
+              observe.
+            </p>
             <div className="mt-8 flex flex-col gap-4 border-t border-plaster/25 pt-8">
               <p className="font-mono text-sm text-plaster/70">
                 Next evening
@@ -178,22 +216,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Paris */}
-      <section className="mx-auto max-w-6xl px-6 py-20 text-center md:py-28">
-        <p className="eyebrow text-bronze">Opening Soon</p>
+      {/* Lifestyle */}
+      <section className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
+        <p className="eyebrow text-bronze">Lifestyle</p>
         <h2 className="font-display mt-3 text-3xl md:text-4xl">
-          Musetta is coming to Paris
+          Art and design, encountered through living
         </h2>
         <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          A second showroom, a second table. Join the list to hear first
-          about the opening, the first dinners, and the pieces making the
-          journey.
+          An armchair holds a quiet morning. A dining table carries
+          celebration and conversation. By seeing pieces used as
+          they&rsquo;re meant to be, you come to recognise what resonates
+          with your own way of living, rather than what simply looks
+          good — all in a corner of Elizabeth Bay you&rsquo;re welcome to
+          visit for yourself.
         </p>
         <Link
-          href="/contact"
+          href="/showroom"
           className="eyebrow mt-8 inline-block rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
         >
-          Join the Paris List
+          Step Into the Showroom
         </Link>
       </section>
     </>

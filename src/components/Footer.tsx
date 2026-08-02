@@ -26,16 +26,13 @@ export default function Footer() {
               The Showroom — Elizabeth Bay, Sydney
               <br />
               By private appointment
-              <br />
-              <br />
-              Musetta Paris — opening soon
             </p>
           </div>
 
           <div>
             <p className="eyebrow mb-4 text-ink-soft">Correspondence</p>
             <p className="text-sm leading-relaxed text-ink-soft">
-              hello@musetta.com
+              musettaelizabethbay@gmail.com
               <br />
               <Link href="/contact" className="underline decoration-line underline-offset-4 hover:text-bronze">
                 Enquire about a piece or an evening
@@ -46,7 +43,7 @@ export default function Footer() {
 
         <div className="mt-14 flex flex-col gap-2 border-t border-line/70 pt-6 text-xs text-ink-soft/80 md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Musetta. All rights reserved.</p>
-          <p className="font-mono">Sydney — Paris</p>
+          <p className="font-mono">Elizabeth Bay, Sydney</p>
         </div>
       </div>
     </footer>

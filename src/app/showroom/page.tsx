@@ -68,14 +68,45 @@ export default function Showroom() {
         </div>
       </section>
 
+      <section className="border-y border-line/70 bg-plaster-deep">
+        <div className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
+          <div className="max-w-2xl">
+            <p className="eyebrow text-bronze">Art at Musetta</p>
+            <h2 className="font-display mt-3 text-2xl leading-snug md:text-3xl">
+              A living canvas for today&rsquo;s most compelling artistic
+              voices.
+            </h2>
+            <p className="mt-6 text-ink-soft">
+              We exhibit contemporary creators whose work challenges
+              convention while enhancing the dialogue between art and
+              interior. Through relationships with emerging and
+              established galleries, we show pieces you can experience
+              intimately — not behind velvet ropes, but as part of daily
+              life. The rooms rotate thoughtfully, creating fresh
+              encounters within the space while giving artists a platform
+              that transcends the traditional white cube. Each selection
+              is made with intention, considering not just artistic merit
+              but how a piece contributes to the room around it.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
-        <p className="eyebrow text-bronze">Coming Next</p>
+        <p className="eyebrow text-bronze">How We Collect</p>
         <h2 className="font-display mt-3 text-3xl md:text-4xl">
-          A second room, in Paris
+          Provenance and presence
         </h2>
-        <p className="mx-auto mt-4 max-w-md text-ink-soft">
-          The same idea, a second city. Details to follow as the space
-          comes together.
+        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
+          Our pursuit of exceptional historical pieces drives how Musetta
+          collects. We look for objects that carry both provenance and
+          presence — things that have stood the test of time yet remain
+          vibrantly relevant. Through considered participation in
+          auctions, private sales, and consignments, we build a
+          collection that tells a story across eras and movements. These
+          pieces form the foundation of the showroom, showing how
+          thoughtfully chosen historical work creates meaningful contrast
+          for contemporary living.
         </p>
       </section>
     </>

@@ -5,8 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 // Self-hosted (not loaded from Google's CDN at request time) — one less
-// third-party request, and no visitor data shared with Google, which
-// matters for the Paris/EU launch.
+// third-party request, and no visitor data shared with Google.
 const display = localFont({
   variable: "--font-display",
   src: [
@@ -40,7 +39,7 @@ const mono = localFont({
 export const metadata: Metadata = {
   title: "Musetta — Antiques & Hosted Dinners",
   description:
-    "Musetta is a living showroom of unique antique furniture and curated hosted dinners, launching in Paris.",
+    "Musetta is a living showroom of unique antique furniture and curated hosted dinners in Elizabeth Bay, Sydney.",
 };
 
 export default function RootLayout({

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  /* Color tokens — warm Parisian apartment palette */
+  /* Color tokens — warm Elizabeth Bay apartment palette */
   --plaster: #e7e0d1;      /* background — aged plaster wall */
   --plaster-deep: #ded5c1; /* section contrast */
   --ink: #221e19;          /* primary text — warm near-black */

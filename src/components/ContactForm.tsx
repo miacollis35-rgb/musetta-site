@@ -63,7 +63,6 @@ export default function ContactForm() {
           <option>Hosted dinner enquiry</option>
           <option>A specific piece</option>
           <option>Sourcing request</option>
-          <option>Paris opening — keep me posted</option>
           <option>Something else</option>
         </select>
       </div>

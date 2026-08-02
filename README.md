@@ -44,7 +44,7 @@ Visit `http://localhost:3000`.
   // inside POST, after validation:
   await resend.emails.send({
     from: "Musetta <enquiries@yourdomain.com>",
-    to: "hello@musetta.com",
+    to: "musettaelizabethbay@gmail.com",
     subject: `New enquiry: ${body.reason}`,
     text: `${body.name} (${body.email}):\n\n${body.message}`,
   });

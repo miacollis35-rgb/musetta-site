@@ -25,12 +25,8 @@ export default function Contact() {
               </dd>
             </div>
             <div>
-              <dt className="eyebrow text-ink-soft">Paris</dt>
-              <dd className="mt-1">Opening soon — join the list below</dd>
-            </div>
-            <div>
               <dt className="eyebrow text-ink-soft">Email</dt>
-              <dd className="mt-1">hello@musetta.com</dd>
+              <dd className="mt-1">musettaelizabethbay@gmail.com</dd>
             </div>
           </dl>
         </div>
