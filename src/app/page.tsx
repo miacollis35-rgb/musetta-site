@@ -44,10 +44,10 @@ export default function Home() {
           <Image
             src="/brand/musetta-logo-full-transparent.png"
             alt="Musetta"
-            width={1079}
-            height={881}
+            width={2197}
+            height={634}
             priority
-            className="mt-8 h-auto w-full max-w-md drop-shadow-[0_2px_20px_rgba(0,0,0,0.25)]"
+            className="mt-8 h-auto w-full max-w-2xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.25)]"
           />
           <p className="font-display mt-8 max-w-xl text-2xl italic text-paper md:text-3xl">
             A living showroom for objects that were always meant to be used,

@@ -22,9 +22,9 @@ export default function Nav() {
           <Image
             src="/brand/musetta-icon-transparent.png"
             alt=""
-            width={32}
-            height={32}
-            className="h-8 w-8 object-contain"
+            width={376}
+            height={309}
+            className="h-8 w-auto object-contain"
             priority
           />
           <span className="font-display text-2xl tracking-wide">Musetta</span>
