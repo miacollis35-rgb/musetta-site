@@ -39,9 +39,9 @@ export const pieces: Piece[] = [
   },
   {
     slug: "chinese-blue-white-ginger-jar",
-    title: "Chinese Blue and White Lidded Ginger Jar with Double Happiness Symbol and Foliate Decoration",
-    era: "19th century, Kangxi-style",
-    material: "Porcelain, fitted lid",
+    title: "Chinese Blue and White 'Double Happiness' Ginger Jar",
+    era: "Qing Dynasty, 19th century",
+    material: "26cm high, porcelain, fitted lid",
     price: "$500",
     category: "Ceramics",
     sold: false,
@@ -53,7 +53,7 @@ export const pieces: Piece[] = [
       "/collection/ginger-jar-5.webp",
       "/collection/ginger-jar-6.webp",
     ],
-    note: "No chips, one hairline glaze crackle to the base.",
+    note: "Hand-painted in underglaze blue with central shuangxi characters. Unglazed base consistent with age.",
   },
   {
     slug: "octagonal-chinoiserie-mirror",
