@@ -39,7 +39,7 @@ export const pieces: Piece[] = [
   },
   {
     slug: "chinese-blue-white-ginger-jar",
-    title: "Chinese blue & white ginger jar",
+    title: "Chinese Blue and White Lidded Ginger Jar with Double Happiness Symbol and Foliate Decoration",
     era: "19th century, Kangxi-style",
     material: "Porcelain, fitted lid",
     price: "$500",
@@ -53,7 +53,7 @@ export const pieces: Piece[] = [
       "/collection/ginger-jar-5.webp",
       "/collection/ginger-jar-6.webp",
     ],
-    note: "Found at a Sydney estate sale, provenance unclear beyond the last owner. No chips, one hairline glaze crackle to the base.",
+    note: "No chips, one hairline glaze crackle to the base.",
   },
   {
     slug: "octagonal-chinoiserie-mirror",
