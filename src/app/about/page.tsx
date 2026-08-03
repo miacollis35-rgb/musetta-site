@@ -19,7 +19,7 @@ export default function About() {
       <section className="px-6 py-14 md:py-20">
         <div className="relative mx-auto aspect-[3/4] w-full max-w-xl overflow-hidden">
           <Image
-            src="/about/harbour-terrace.webp"
+            src="/about/living-room-view.webp"
             alt="The harbour view from the Musetta balcony, Elizabeth Bay"
             fill
             sizes="(min-width: 768px) 576px, 100vw"
