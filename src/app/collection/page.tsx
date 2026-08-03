@@ -1,208 +1,224 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { categories, pieces, type Piece } from "@/data/pieces";
+import { pieces } from "@/data/pieces";
 
-const filterOptions = [...categories, "Sold"];
+const featured = pieces.filter((p) => !p.sold).slice(0, 3);
 
-export default function Collection() {
-  const [active, setActive] = useState("All");
-
-  const filtered =
-    active === "All"
-      ? pieces
-      : active === "Sold"
-      ? pieces.filter((p) => p.sold)
-      : pieces.filter((p) => p.category === active && !p.sold);
-
-  // Sold pieces always sink to the bottom of whatever's currently shown,
-  // without disturbing the order otherwise.
-  const visible = [...filtered].sort(
-    (a, b) => Number(a.sold) - Number(b.sold)
-  );
-
+export default function Home() {
   return (
     <>
-      <section className="mx-auto max-w-6xl px-6 pb-10 pt-16 md:px-10 md:pt-20">
-        <p className="eyebrow text-bronze">The Collection</p>
-        <h1 className="font-display mt-3 max-w-2xl text-4xl md:text-5xl">
-          Pieces currently passing through the showroom
-        </h1>
-        <p className="mt-5 max-w-xl text-ink-soft">
-          Everything here is genuinely in use in Elizabeth Bay until it
-          finds its next home. Ask about condition, dimensions, or
-          provenance — we know each piece by hand.
-        </p>
+      {/* Hero */}
+      <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
+        <Image
+          src="/hero/living-room-harbor.webp"
+          alt="A sunlit corner of the Musetta showroom in Elizabeth Bay, overlooking the harbour"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/45" />
+
+        <div className="relative flex flex-col items-center">
+          <p className="eyebrow text-paper/90">
+            Antiques &middot; Hosted Dinners &middot; Elizabeth Bay
+          </p>
+          <Image
+            src="/brand/musetta-logo-full-transparent.png"
+            alt="Musetta"
+            width={2197}
+            height={634}
+            priority
+            className="mt-8 h-auto w-full max-w-2xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.25)]"
+          />
+          <p className="font-display mt-8 max-w-xl text-2xl italic text-paper md:text-3xl">
+            A living showroom for objects that were always meant to be used,
+            not shelved.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/showroom"
+              className="eyebrow rounded-full bg-paper px-6 py-3 text-ink transition-colors hover:bg-bronze hover:text-paper"
+            >
+              Step Into the Showroom
+            </Link>
+            <Link
+              href="/collection"
+              className="eyebrow rounded-full border border-paper/70 px-6 py-3 text-paper transition-colors hover:border-paper hover:bg-paper/10"
+            >
+              View the Collection
+            </Link>
+          </div>
+        </div>
       </section>
 
-      <nav
-        aria-label="Filter by category"
-        className="sticky top-[73px] z-40 border-y border-line/70 bg-plaster/95 backdrop-blur"
-      >
-        <div className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-2 px-6 py-4 md:px-10">
-          {filterOptions.map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => setActive(c)}
-              aria-pressed={active === c}
-              className={`eyebrow transition-colors hover:text-bronze ${
-                active === c ? "text-bronze" : "text-ink-soft"
-              }`}
-            >
-              {c}
-            </button>
-          ))}
+      {/* What is Musetta — one tight statement */}
+      <section className="bg-paper">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[0.9fr_1.1fr] md:gap-20 md:px-10 md:py-32">
+          <div className="relative aspect-[3/4] w-full overflow-hidden md:-translate-y-6">
+            <Image
+              src="/collection/corner-console-lamp.webp"
+              alt="A corner of the Musetta showroom"
+              fill
+              sizes="(min-width: 768px) 40vw, 90vw"
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <p className="eyebrow text-bronze">What is Musetta?</p>
+            <p className="font-display mt-3 text-3xl leading-snug text-ink md:text-4xl">
+              An apartment, not a shop.
+            </p>
+            <p className="mt-6 max-w-md text-ink-soft">
+              You come as you would to a friend&rsquo;s home — music
+              playing, coffee offered, sometimes champagne. The pieces are
+              used, lived with, understood in context: a chair you
+              actually sit in, artworks that reveal themselves slowly. If
+              you do choose to take something home, it doesn&rsquo;t feel
+              like shopping. It feels like carrying a piece of a life well
+              lived into your own.
+            </p>
+          </div>
         </div>
-      </nav>
+      </section>
 
-      {visible.length === 0 ? (
-        <section className="mx-auto max-w-6xl px-6 py-20 text-center md:px-10">
-          <p className="text-ink-soft">
-            Nothing in this category right now — check back soon, or ask us
-            to keep an eye out.
-          </p>
-        </section>
-      ) : (
-        <section className="mx-auto max-w-6xl px-6 md:px-10">
-          {visible.map((p, i) => (
-            <PieceRow key={p.slug} piece={p} index={i} />
-          ))}
-        </section>
-      )}
+      {/* Selected objects — asymmetric, editorial */}
+      <section className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
+        <div className="mb-12 flex items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow text-bronze">Recently Found</p>
+            <h2 className="font-display mt-2 text-3xl md:text-4xl">
+              A few pieces passing through
+            </h2>
+          </div>
+          <Link
+            href="/collection"
+            className="eyebrow hidden shrink-0 underline decoration-line underline-offset-4 hover:text-bronze md:block"
+          >
+            Full Collection →
+          </Link>
+        </div>
 
-      <section className="mx-auto max-w-6xl px-6 py-20 text-center md:py-28">
-        <p className="font-display text-2xl italic text-ink-soft md:text-3xl">
-          Looking for something specific?
-        </p>
-        <p className="mx-auto mt-4 max-w-md text-ink-soft">
-          We source on request — tell us what you&rsquo;re after and we&rsquo;ll
-          keep an eye out.
-        </p>
+        {featured.length > 0 && (
+          <div className="grid gap-10 md:grid-cols-2">
+            <PieceCard item={featured[0]} tall />
+            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-1">
+              {featured.slice(1, 3).map((item) => (
+                <PieceCard key={item.slug} item={item} />
+              ))}
+            </div>
+          </div>
+        )}
+
         <Link
-          href="/contact"
-          className="eyebrow mt-6 inline-block rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
+          href="/collection"
+          className="eyebrow mt-10 block text-center underline decoration-line underline-offset-4 hover:text-bronze md:hidden"
         >
-          Send a Sourcing Request
+          Full Collection →
         </Link>
+      </section>
+
+      {/* Hosted dinners */}
+      <section className="bg-bordeaux text-plaster">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-28">
+          <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <Image
+              src="/collection/dining-chairs.webp"
+              alt="Dining chairs set for a hosted evening at the Musetta showroom"
+              fill
+              sizes="(min-width: 768px) 45vw, 90vw"
+              className="object-cover"
+            />
+          </div>
+          <div className="flex flex-col justify-center">
+            <p className="eyebrow text-rose">Hosted Dinners</p>
+            <h2 className="font-display mt-3 text-3xl leading-snug md:text-4xl">
+              The table is set with what&rsquo;s in the room — and everything
+              on it can go home with you.
+            </h2>
+            <p className="mt-6 max-w-lg text-plaster/85">
+              A handful of evenings each season, the showroom becomes a
+              dinner table and a cocktail hour turns the viewing into a
+              soirée. Small parties, a menu built around the season, and a
+              room full of pieces you&rsquo;re welcome to ask about
+              between courses.
+            </p>
+            <div className="mt-8 flex flex-col gap-4 border-t border-plaster/25 pt-8">
+              <p className="font-mono text-sm text-plaster/70">
+                Next evening
+                <br />
+                <span className="text-plaster">Sydney — dates by enquiry</span>
+              </p>
+              <Link
+                href="/contact"
+                className="eyebrow mt-2 w-fit rounded-full border border-plaster/60 px-6 py-3 transition-colors hover:border-plaster hover:bg-plaster hover:text-bordeaux"
+              >
+                Request an Invitation
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Closing / visit */}
+      <section className="mx-auto max-w-2xl px-6 py-20 text-center md:py-28">
+        <h2 className="font-display text-3xl md:text-4xl">
+          Come and see for yourself
+        </h2>
+        <p className="mx-auto mt-5 max-w-md text-ink-soft">
+          Viewings are by private appointment in Elizabeth Bay. No
+          obligation to buy anything — you&rsquo;re welcome to sit down.
+        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <Link
+            href="/showroom"
+            className="eyebrow rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
+          >
+            Step Into the Showroom
+          </Link>
+          <Link
+            href="/contact"
+            className="eyebrow rounded-full border border-ink px-6 py-3 transition-colors hover:border-bronze hover:text-bronze"
+          >
+            Request a Viewing
+          </Link>
+        </div>
       </section>
     </>
   );
 }
 
-function PieceRow({ piece: p, index: i }: { piece: Piece; index: number }) {
-  const [imgIndex, setImgIndex] = useState(0);
-  const hasMultiple = p.images.length > 1;
-
-  function next(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    setImgIndex((n) => (n + 1) % p.images.length);
-  }
-
-  function prev(e: React.MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    setImgIndex((n) => (n - 1 + p.images.length) % p.images.length);
-  }
-
+function PieceCard({
+  item,
+  tall,
+}: {
+  item: (typeof pieces)[number];
+  tall?: boolean;
+}) {
   return (
-    <article
-      className={`grid gap-6 py-16 md:grid-cols-2 md:items-center md:gap-16 md:py-24 ${
-        i > 0 ? "border-t border-line/60" : ""
-      }`}
-    >
-      <Link
-        href={`/collection/${p.slug}`}
-        className={`group relative block aspect-[4/5] w-full overflow-hidden ${
-          i % 2 === 1 ? "md:order-2" : ""
+    <Link href={`/collection/${item.slug}`} className="group block">
+      <div
+        className={`relative w-full overflow-hidden ${
+          tall ? "aspect-[3/4]" : "aspect-[4/5]"
         }`}
       >
         <Image
-          src={p.images[imgIndex]}
-          alt={p.title}
+          src={item.images[0]}
+          alt={item.title}
           fill
-          sizes="(min-width: 768px) 45vw, 90vw"
-          className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
-            p.sold ? "grayscale" : ""
-          }`}
+          sizes="(min-width: 768px) 35vw, 90vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        {p.sold && (
-          <span className="eyebrow absolute left-4 top-4 rounded-full bg-ink px-3 py-1 text-plaster">
-            Sold
-          </span>
-        )}
-
-        {hasMultiple && (
-          <>
-            <button
-              type="button"
-              onClick={prev}
-              aria-label="Previous photo"
-              className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/40 text-paper backdrop-blur-sm transition-colors duration-200 hover:bg-ink/60"
-            >
-              <ArrowIcon direction="left" />
-            </button>
-            <button
-              type="button"
-              onClick={next}
-              aria-label="Next photo"
-              className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/40 text-paper backdrop-blur-sm transition-colors duration-200 hover:bg-ink/60"
-            >
-              <ArrowIcon direction="right" />
-            </button>
-            <span className="eyebrow absolute bottom-4 right-4 rounded-full bg-ink/40 px-3 py-1 text-paper backdrop-blur-sm">
-              {imgIndex + 1} / {p.images.length}
-            </span>
-          </>
-        )}
-      </Link>
-      <div className={i % 2 === 1 ? "md:order-1" : ""}>
-        <p className="eyebrow text-bronze">{p.category}</p>
-        <h2 className="font-display mt-2 text-3xl md:text-4xl">
-          <Link href={`/collection/${p.slug}`} className="hover:text-bronze">
-            {p.title}
-          </Link>
-        </h2>
-        <p className="mt-1 text-ink-soft">{p.era}</p>
-        <p className="mt-4 max-w-md text-sm leading-relaxed text-ink-soft">
-          {p.note}
-        </p>
-        <div className="mt-6 flex items-center gap-6">
-          {p.sold ? (
-            <span className="eyebrow text-ink-soft">Sold</span>
-          ) : (
-            <span className="font-mono text-lg text-bronze">{p.price}</span>
-          )}
-          <span className="text-sm text-ink-soft">{p.material}</span>
-        </div>
-        <Link
-          href={`/collection/${p.slug}`}
-          className="eyebrow mt-6 inline-block underline decoration-line underline-offset-4 hover:text-bronze"
-        >
-          {p.sold ? "View Piece →" : "View & Enquire →"}
-        </Link>
       </div>
-    </article>
-  );
-}
-
-function ArrowIcon({ direction }: { direction: "left" | "right" }) {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={direction === "left" ? "" : "rotate-180"}
-    >
-      <path d="M15 18l-6-6 6-6" />
-    </svg>
+      <div className="mt-4 flex items-baseline justify-between gap-4">
+        <h3 className="font-display text-xl group-hover:text-bronze">
+          {item.title}
+        </h3>
+        <span className="font-mono shrink-0 text-sm text-bronze">
+          {item.price}
+        </span>
+      </div>
+      <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
+    </Link>
   );
 }
