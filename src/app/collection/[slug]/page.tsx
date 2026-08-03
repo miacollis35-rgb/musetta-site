@@ -1,224 +1,185 @@
-import Image from "next/image";
+import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
+import type { Metadata } from "next";
 import { pieces } from "@/data/pieces";
+import PieceGallery from "@/components/PieceGallery";
 
-const featured = pieces.filter((p) => !p.sold).slice(0, 3);
+// Update this once you move off the .vercel.app URL onto a custom domain.
+const BASE_URL = "https://musetta-site.vercel.app";
 
-export default function Home() {
+export function generateStaticParams() {
+  return pieces.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const piece = pieces.find((p) => p.slug === slug);
+  if (!piece) return {};
+
+  const title = `${piece.title} — Musetta`;
+  const description = `${piece.era}. ${piece.material}. ${piece.note}`;
+  const url = `${BASE_URL}/collection/${piece.slug}`;
+  const imageUrl = `${BASE_URL}${piece.images[0]}`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: url,
+    },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: "Musetta",
+      images: [{ url: imageUrl, width: 1200, height: 1500, alt: piece.title }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
+  };
+}
+
+export default async function PiecePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const piece = pieces.find((p) => p.slug === slug);
+  if (!piece) notFound();
+
+  const related = pieces
+    .filter((p) => p.category === piece.category && p.slug !== piece.slug)
+    .slice(0, 3);
+
+  // Product schema — this is what search engines and AI answer engines
+  // (ChatGPT, Perplexity, Gemini) read to know exactly what this piece is,
+  // what it's worth, and whether it's still available.
+  const priceValue = piece.price.replace(/[^0-9.]/g, "");
+  const productSchema = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: piece.title,
+    description: `${piece.era}. ${piece.material}. ${piece.note}`,
+    image: piece.images.map((img) => `${BASE_URL}${img}`),
+    category: piece.category,
+    brand: {
+      "@type": "Brand",
+      name: "Musetta",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `${BASE_URL}/collection/${piece.slug}`,
+      priceCurrency: "AUD",
+      price: priceValue || undefined,
+      availability: piece.sold
+        ? "https://schema.org/SoldOut"
+        : "https://schema.org/InStock",
+      itemCondition: "https://schema.org/UsedCondition",
+      seller: {
+        "@type": "Organization",
+        name: "Musetta",
+      },
+    },
+  };
+
   return (
     <>
-      {/* Hero */}
-      <section className="relative flex min-h-[92vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
-        <Image
-          src="/hero/living-room-harbor.webp"
-          alt="A sunlit corner of the Musetta showroom in Elizabeth Bay, overlooking the harbour"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/45" />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
+      />
 
-        <div className="relative flex flex-col items-center">
-          <p className="eyebrow text-paper/90">
-            Antiques &middot; Hosted Dinners &middot; Elizabeth Bay
-          </p>
-          <Image
-            src="/brand/musetta-logo-full-transparent.png"
-            alt="Musetta"
-            width={2197}
-            height={634}
-            priority
-            className="mt-8 h-auto w-full max-w-2xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.25)]"
-          />
-          <p className="font-display mt-8 max-w-xl text-2xl italic text-paper md:text-3xl">
-            A living showroom for objects that were always meant to be used,
-            not shelved.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              href="/showroom"
-              className="eyebrow rounded-full bg-paper px-6 py-3 text-ink transition-colors hover:bg-bronze hover:text-paper"
-            >
-              Step Into the Showroom
-            </Link>
-            <Link
-              href="/collection"
-              className="eyebrow rounded-full border border-paper/70 px-6 py-3 text-paper transition-colors hover:border-paper hover:bg-paper/10"
-            >
-              View the Collection
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* What is Musetta — one tight statement */}
-      <section className="bg-paper">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 py-20 md:grid-cols-[0.9fr_1.1fr] md:gap-20 md:px-10 md:py-32">
-          <div className="relative aspect-[3/4] w-full overflow-hidden md:-translate-y-6">
-            <Image
-              src="/collection/corner-console-lamp.webp"
-              alt="A corner of the Musetta showroom"
-              fill
-              sizes="(min-width: 768px) 40vw, 90vw"
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <p className="eyebrow text-bronze">What is Musetta?</p>
-            <p className="font-display mt-3 text-3xl leading-snug text-ink md:text-4xl">
-              An apartment, not a shop.
-            </p>
-            <p className="mt-6 max-w-md text-ink-soft">
-              You come as you would to a friend&rsquo;s home — music
-              playing, coffee offered, sometimes champagne. The pieces are
-              used, lived with, understood in context: a chair you
-              actually sit in, artworks that reveal themselves slowly. If
-              you do choose to take something home, it doesn&rsquo;t feel
-              like shopping. It feels like carrying a piece of a life well
-              lived into your own.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Selected objects — asymmetric, editorial */}
-      <section className="mx-auto max-w-6xl px-6 py-20 md:px-10 md:py-28">
-        <div className="mb-12 flex items-end justify-between gap-6">
-          <div>
-            <p className="eyebrow text-bronze">Recently Found</p>
-            <h2 className="font-display mt-2 text-3xl md:text-4xl">
-              A few pieces passing through
-            </h2>
-          </div>
-          <Link
-            href="/collection"
-            className="eyebrow hidden shrink-0 underline decoration-line underline-offset-4 hover:text-bronze md:block"
-          >
-            Full Collection →
-          </Link>
-        </div>
-
-        {featured.length > 0 && (
-          <div className="grid gap-10 md:grid-cols-2">
-            <PieceCard item={featured[0]} tall />
-            <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-1">
-              {featured.slice(1, 3).map((item) => (
-                <PieceCard key={item.slug} item={item} />
-              ))}
-            </div>
-          </div>
-        )}
-
+      <section className="mx-auto max-w-6xl px-6 pt-8 md:px-10">
         <Link
           href="/collection"
-          className="eyebrow mt-10 block text-center underline decoration-line underline-offset-4 hover:text-bronze md:hidden"
+          className="eyebrow text-ink-soft underline decoration-line underline-offset-4 hover:text-bronze"
         >
-          Full Collection →
+          ← Full Collection
         </Link>
       </section>
 
-      {/* Hosted dinners */}
-      <section className="bg-bordeaux text-plaster">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-2 md:gap-16 md:px-10 md:py-28">
-          <div className="relative aspect-[4/5] w-full overflow-hidden">
-            <Image
-              src="/collection/dining-chairs.webp"
-              alt="Dining chairs set for a hosted evening at the Musetta showroom"
-              fill
-              sizes="(min-width: 768px) 45vw, 90vw"
-              className="object-cover"
-            />
-          </div>
-          <div className="flex flex-col justify-center">
-            <p className="eyebrow text-rose">Hosted Dinners</p>
-            <h2 className="font-display mt-3 text-3xl leading-snug md:text-4xl">
-              The table is set with what&rsquo;s in the room — and everything
-              on it can go home with you.
-            </h2>
-            <p className="mt-6 max-w-lg text-plaster/85">
-              A handful of evenings each season, the showroom becomes a
-              dinner table and a cocktail hour turns the viewing into a
-              soirée. Small parties, a menu built around the season, and a
-              room full of pieces you&rsquo;re welcome to ask about
-              between courses.
-            </p>
-            <div className="mt-8 flex flex-col gap-4 border-t border-plaster/25 pt-8">
-              <p className="font-mono text-sm text-plaster/70">
-                Next evening
-                <br />
-                <span className="text-plaster">Sydney — dates by enquiry</span>
-              </p>
-              <Link
-                href="/contact"
-                className="eyebrow mt-2 w-fit rounded-full border border-plaster/60 px-6 py-3 transition-colors hover:border-plaster hover:bg-plaster hover:text-bordeaux"
-              >
-                Request an Invitation
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <section className="mx-auto grid max-w-6xl gap-12 px-6 py-10 md:grid-cols-[1.1fr_0.9fr] md:gap-16 md:px-10 md:py-14">
+        <PieceGallery images={piece.images} title={piece.title} sold={piece.sold} />
 
-      {/* Closing / visit */}
-      <section className="mx-auto max-w-2xl px-6 py-20 text-center md:py-28">
-        <h2 className="font-display text-3xl md:text-4xl">
-          Come and see for yourself
-        </h2>
-        <p className="mx-auto mt-5 max-w-md text-ink-soft">
-          Viewings are by private appointment in Elizabeth Bay. No
-          obligation to buy anything — you&rsquo;re welcome to sit down.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          <Link
-            href="/showroom"
-            className="eyebrow rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
-          >
-            Step Into the Showroom
-          </Link>
+        <div className="md:pt-4">
+          <p className="eyebrow text-bronze">{piece.category}</p>
+          <h1 className="font-display mt-2 text-4xl md:text-5xl">{piece.title}</h1>
+          <p className="mt-2 text-ink-soft">{piece.era}</p>
+
+          <div className="mt-8 flex items-baseline gap-6">
+            {piece.sold ? (
+              <span className="eyebrow text-ink-soft">Sold</span>
+            ) : (
+              <span className="font-mono text-2xl text-bronze">{piece.price}</span>
+            )}
+          </div>
+
+          <p className="mt-6 max-w-md leading-relaxed text-ink-soft">{piece.note}</p>
+          <p className="mt-4 border-t border-line/60 pt-4 text-sm text-ink-soft">
+            {piece.material}
+          </p>
+
+          {piece.sold ? (
+            <p className="mt-8 max-w-sm text-sm text-ink-soft">
+              This piece has found its home. Interested in something similar?
+              We source on request.
+            </p>
+          ) : null}
+
           <Link
             href="/contact"
-            className="eyebrow rounded-full border border-ink px-6 py-3 transition-colors hover:border-bronze hover:text-bronze"
+            className="eyebrow mt-8 inline-block rounded-full bg-ink px-6 py-3 text-plaster transition-colors hover:bg-bronze"
           >
-            Request a Viewing
+            {piece.sold ? "Ask About Something Similar" : "Enquire About This Piece"}
           </Link>
         </div>
       </section>
-    </>
-  );
-}
 
-function PieceCard({
-  item,
-  tall,
-}: {
-  item: (typeof pieces)[number];
-  tall?: boolean;
-}) {
-  return (
-    <Link href={`/collection/${item.slug}`} className="group block">
-      <div
-        className={`relative w-full overflow-hidden ${
-          tall ? "aspect-[3/4]" : "aspect-[4/5]"
-        }`}
-      >
-        <Image
-          src={item.images[0]}
-          alt={item.title}
-          fill
-          sizes="(min-width: 768px) 35vw, 90vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-      </div>
-      <div className="mt-4 flex items-baseline justify-between gap-4">
-        <h3 className="font-display text-xl group-hover:text-bronze">
-          {item.title}
-        </h3>
-        <span className="font-mono shrink-0 text-sm text-bronze">
-          {item.price}
-        </span>
-      </div>
-      <p className="mt-1 text-sm text-ink-soft">{item.note}</p>
-    </Link>
+      {related.length > 0 && (
+        <section className="border-t border-line/60 bg-paper">
+          <div className="mx-auto max-w-6xl px-6 py-16 md:px-10 md:py-20">
+            <p className="eyebrow text-bronze">More {piece.category}</p>
+            <div className="mt-8 grid gap-10 md:grid-cols-3">
+              {related.map((r) => (
+                <Link key={r.slug} href={`/collection/${r.slug}`} className="group">
+                  <div className="relative aspect-[4/5] w-full overflow-hidden">
+                    <Image
+                      src={r.images[0]}
+                      alt={r.title}
+                      fill
+                      sizes="30vw"
+                      className={`object-cover transition-transform duration-500 group-hover:scale-105 ${
+                        r.sold ? "grayscale" : ""
+                      }`}
+                    />
+                  </div>
+                  <div className="mt-4 flex items-baseline justify-between gap-4">
+                    <h3 className="font-display text-xl group-hover:text-bronze">{r.title}</h3>
+                    {r.sold ? (
+                      <span className="eyebrow shrink-0 text-ink-soft">Sold</span>
+                    ) : (
+                      <span className="font-mono shrink-0 text-sm text-bronze">
+                        {r.price}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </>
   );
 }

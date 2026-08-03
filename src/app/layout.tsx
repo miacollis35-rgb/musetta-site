@@ -38,6 +38,37 @@ export const metadata: Metadata = {
   description:
     "Musetta is a living showroom of unique antique furniture and curated hosted dinners in Elizabeth Bay, Sydney.",
 };
+
+// LocalBusiness schema — read by Google and AI answer engines (ChatGPT,
+// Perplexity, Gemini) to understand what Musetta is, where roughly it's
+// based, and how to get in touch. No street address (appointment-only,
+// kept private) and no phone — just the contact form. Suburb-level
+// location only, matching what's already public on the About page.
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Musetta",
+  description:
+    "Musetta is a living showroom in Elizabeth Bay, Sydney — an apartment overlooking the harbour where antique furniture, art, and objects are lived with rather than displayed, alongside seasonal curated hosted dinners. Viewings are by private appointment only.",
+  url: "https://musetta-site.vercel.app",
+  areaServed: {
+    "@type": "City",
+    name: "Sydney",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Elizabeth Bay",
+    addressRegion: "NSW",
+    addressCountry: "AU",
+  },
+  openingHours: "By appointment only",
+  potentialAction: {
+    "@type": "CommunicateAction",
+    target: "https://musetta-site.vercel.app/contact",
+    name: "Request a Viewing",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -48,6 +79,12 @@ export default function RootLayout({
       lang="en"
       className={`${display.variable} ${body.variable} ${mono.variable} h-full`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-plaster text-ink">
         <Nav />
         <main className="flex-1">{children}</main>
