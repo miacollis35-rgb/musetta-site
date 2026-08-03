@@ -7,20 +7,21 @@ import { categories, pieces, type Piece } from "@/data/pieces";
 
 const filterOptions = [...categories, "Sold"];
 
-// A small, deterministic rhythm of aspect ratios so the page doesn't
-// read as a uniform grid — each entry gets a slightly different crop,
-// the way a magazine spread varies image sizes without losing order.
-const ratios = ["aspect-[3/4]", "aspect-[4/5]", "aspect-square"];
-
 export default function Collection() {
   const [active, setActive] = useState("All");
 
-  const visible =
+  const filtered =
     active === "All"
       ? pieces
       : active === "Sold"
       ? pieces.filter((p) => p.sold)
       : pieces.filter((p) => p.category === active && !p.sold);
+
+  // Sold pieces always sink to the bottom of whatever's currently shown,
+  // without disturbing the order otherwise.
+  const visible = [...filtered].sort(
+    (a, b) => Number(a.sold) - Number(b.sold)
+  );
 
   return (
     <>
@@ -92,7 +93,20 @@ export default function Collection() {
 }
 
 function PieceRow({ piece: p, index: i }: { piece: Piece; index: number }) {
-  const ratio = ratios[i % ratios.length];
+  const [imgIndex, setImgIndex] = useState(0);
+  const hasMultiple = p.images.length > 1;
+
+  function next(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setImgIndex((n) => (n + 1) % p.images.length);
+  }
+
+  function prev(e: React.MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    setImgIndex((n) => (n - 1 + p.images.length) % p.images.length);
+  }
 
   return (
     <article
@@ -102,12 +116,12 @@ function PieceRow({ piece: p, index: i }: { piece: Piece; index: number }) {
     >
       <Link
         href={`/collection/${p.slug}`}
-        className={`group relative block w-full overflow-hidden ${ratio} ${
+        className={`group relative block aspect-[4/5] w-full overflow-hidden ${
           i % 2 === 1 ? "md:order-2" : ""
         }`}
       >
         <Image
-          src={p.images[0]}
+          src={p.images[imgIndex]}
           alt={p.title}
           fill
           sizes="(min-width: 768px) 45vw, 90vw"
@@ -119,6 +133,30 @@ function PieceRow({ piece: p, index: i }: { piece: Piece; index: number }) {
           <span className="eyebrow absolute left-4 top-4 rounded-full bg-ink px-3 py-1 text-plaster">
             Sold
           </span>
+        )}
+
+        {hasMultiple && (
+          <>
+            <button
+              type="button"
+              onClick={prev}
+              aria-label="Previous photo"
+              className="absolute left-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/40 text-paper backdrop-blur-sm transition-colors duration-200 hover:bg-ink/60"
+            >
+              <ArrowIcon direction="left" />
+            </button>
+            <button
+              type="button"
+              onClick={next}
+              aria-label="Next photo"
+              className="absolute right-3 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-ink/40 text-paper backdrop-blur-sm transition-colors duration-200 hover:bg-ink/60"
+            >
+              <ArrowIcon direction="right" />
+            </button>
+            <span className="eyebrow absolute bottom-4 right-4 rounded-full bg-ink/40 px-3 py-1 text-paper backdrop-blur-sm">
+              {imgIndex + 1} / {p.images.length}
+            </span>
+          </>
         )}
       </Link>
       <div className={i % 2 === 1 ? "md:order-1" : ""}>
@@ -148,5 +186,23 @@ function PieceRow({ piece: p, index: i }: { piece: Piece; index: number }) {
         </Link>
       </div>
     </article>
+  );
+}
+
+function ArrowIcon({ direction }: { direction: "left" | "right" }) {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={direction === "left" ? "" : "rotate-180"}
+    >
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
   );
 }
