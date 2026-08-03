@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-
+import { Analytics } from "@vercel/analytics/next";
 // Self-hosted (not loaded from Google's CDN at request time) — one less
 // third-party request, and no visitor data shared with Google.
 const display = localFont({
@@ -17,7 +17,6 @@ const display = localFont({
     { path: "../fonts/CormorantGaramond-MediumItalic.woff2", weight: "500", style: "italic" },
   ],
 });
-
 const body = localFont({
   variable: "--font-body",
   src: [
@@ -27,7 +26,6 @@ const body = localFont({
     { path: "../fonts/Lora-Italic-Regular.woff2", weight: "400", style: "italic" },
   ],
 });
-
 const mono = localFont({
   variable: "--font-mono",
   src: [
@@ -35,13 +33,11 @@ const mono = localFont({
     { path: "../fonts/SpaceMono-Bold.woff2", weight: "700", style: "normal" },
   ],
 });
-
 export const metadata: Metadata = {
   title: "Musetta — Antiques & Hosted Dinners",
   description:
     "Musetta is a living showroom of unique antique furniture and curated hosted dinners in Elizabeth Bay, Sydney.",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,6 +52,7 @@ export default function RootLayout({
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
