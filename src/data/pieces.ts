@@ -31,11 +31,9 @@ export const pieces: Piece[] = [
     category: "Textiles",
     sold: false,
     images: [
-      "/collection/kilim.webp",
+      "/collection/kilim-5.webp",
       "/collection/kilim-2.webp",
       "/collection/kilim-3.webp",
-      "/collection/kilim-4.webp",
-      "/collection/kilim-5.webp",
     ],
     note: "Excellent condition for its age. Flat weave, handwoven wool kilim rug originating from Romania. Natural pigment dyes.",
   },
