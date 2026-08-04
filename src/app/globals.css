@@ -2,16 +2,16 @@
 
 :root {
   /* Color tokens — warm Elizabeth Bay apartment palette */
-  --plaster: #ffffff;      /* background — aged plaster wall */
-  --plaster-deep: #7b9146; /* section contrast */
-  --ink: #221e19;          /* primary text — warm near-black */
-  --ink-soft: #4a423a;     /* secondary text */
-  --bronze: #8a6a3c;       /* accent — aged brass / patina */
-  --bordeaux: #9f3b45;     /* secondary accent — wine, hosted dinners */
-  --rose: #dcb9bd;         /* whisper accent, from the mark's origin */
-  --line: #c6b99f;         /* hairline rule */
-  --paper: #f4efe4;        /* card surface, lighter than bg */
-  --umber: #feeb49;         /* footer background */
+  --plaster: #f3e9e0;      /* background — aged plaster wall */
+  --plaster-deep: #93a476; /* section contrast */
+  --ink: #241d16;          /* primary text — warm near-black */
+  --ink-soft: #5a4a3c;     /* secondary text */
+  --bronze: #bd8f2a;       /* accent — aged brass / patina */
+  --bordeaux: #6b2839;     /* secondary accent — wine, hosted dinners */
+  --rose: #d9b3a8;         /* whisper accent, from the mark's origin */
+  --line: #a9a889;         /* hairline rule */
+  --paper: #f8f1e7;        /* card surface, lighter than bg */
+  --umber: #4d1f2e;         /* footer background */
 }
 
 @theme inline {
