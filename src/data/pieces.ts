@@ -203,4 +203,15 @@ export const pieces: Piece[] = [
     ],
     note: "A statement piece — segmented mirrored panels set within a carved, giltwood frame. One small crack to the mirror face, unnoticeable once hung.",
   },
+  {
+    slug: "caterpillar-lorna-naparrula-fencer",
+    title: "Caterpillar by Lorna Naparrula Fencer",
+    era: "1998",
+    material: "100 × 70cm",
+    price: "$4,500",
+    category: "Art",
+    sold: false,
+    images: ["/collection/caterpillar-lorna.webp"],
+    note: "This painting tells a story of women heading into the bush collecting bush tucker. The women would travel all day in large groups, singing and dancing as they collected food to take back to their large families at the campsite.",
+  },
 ];
