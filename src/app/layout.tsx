@@ -50,7 +50,7 @@ const localBusinessSchema = {
   name: "Musetta",
   description:
     "Musetta is a living showroom in Elizabeth Bay, Sydney — an apartment overlooking the harbour where antique furniture, art, and objects are lived with rather than displayed, alongside seasonal curated hosted dinners. Viewings are by private appointment only.",
-  url: "https://musetta-site.vercel.app",
+  url: "https://musetta.com.au",
   areaServed: {
     "@type": "City",
     name: "Sydney",
@@ -64,7 +64,7 @@ const localBusinessSchema = {
   openingHours: "By appointment only",
   potentialAction: {
     "@type": "CommunicateAction",
-    target: "https://musetta-site.vercel.app/contact",
+    target: "https://musetta.com.au/contact",
     name: "Request a Viewing",
   },
 };

@@ -6,7 +6,7 @@ import { pieces } from "@/data/pieces";
 import PieceGallery from "@/components/PieceGallery";
 
 // Update this once you move off the .vercel.app URL onto a custom domain.
-const BASE_URL = "https://musetta-site.vercel.app";
+const BASE_URL = "https://musetta.com.au";
 
 export function generateStaticParams() {
   return pieces.map((p) => ({ slug: p.slug }));
