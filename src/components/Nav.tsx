@@ -13,11 +13,11 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   return (
-    <header className="sticky top-0 z-50 border-b border-line/70 bg-plaster/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-line/70 bg-paper">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
         <Link href="/" className="flex items-center" aria-label="Musetta home">
           <Image
-            src="/brand/musetta-logo-full.svg"
+            src="/brand/musetta-wordmark-nav.svg"
             alt="Musetta"
             width={2904}
             height={852}
