@@ -40,11 +40,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Sold pieces are still valid pages (people search for sold-item provenance
   // and it signals an active, moving collection), so they're included too.
+  // Each piece also lists its images so Google Images can discover and index
+  // them directly, not just the page they sit on.
   const pieceRoutes: MetadataRoute.Sitemap = pieces.map((piece) => ({
     url: `${BASE_URL}/collection/${piece.slug}`,
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: piece.sold ? 0.4 : 0.8,
+    images: piece.images.map((img) => `${BASE_URL}${img}`),
   }));
 
   return [...staticRoutes, ...pieceRoutes];
