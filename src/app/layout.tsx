@@ -50,7 +50,7 @@ const localBusinessSchema = {
   name: "Musetta",
   description:
     "Musetta is a living showroom in Elizabeth Bay, Sydney — an apartment overlooking the harbour where antique furniture, art, and objects are lived with rather than displayed, alongside seasonal curated hosted dinners. Viewings are by private appointment only.",
-  url: "https://musetta.com.au",
+  url: "https://musetta-site.vercel.app",
   areaServed: {
     "@type": "City",
     name: "Sydney",
@@ -59,12 +59,13 @@ const localBusinessSchema = {
     "@type": "PostalAddress",
     addressLocality: "Elizabeth Bay",
     addressRegion: "NSW",
+    postalCode: "2011",
     addressCountry: "AU",
   },
   openingHours: "By appointment only",
   potentialAction: {
     "@type": "CommunicateAction",
-    target: "https://musetta.com.au/contact",
+    target: "https://musetta-site.vercel.app/contact",
     name: "Request a Viewing",
   },
 };
@@ -80,6 +81,10 @@ export default function RootLayout({
       className={`${display.variable} ${body.variable} ${mono.variable} h-full`}
     >
       <head>
+        <meta
+          name="google-site-verification"
+          content="xrOouzTUkBex4TuCGzLQOZwQt1D7GAz21L2ZWYTJ728"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
