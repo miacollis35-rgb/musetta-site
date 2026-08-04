@@ -2,15 +2,15 @@
 
 :root {
   /* Color tokens — warm Elizabeth Bay apartment palette */
-  --plaster: #f3e9e0;      /* background — aged plaster wall */
-  --plaster-deep: #93a476; /* section contrast */
+  --plaster: #f7eee5;      /* background — aged plaster wall */
+  --plaster-deep: #f7eee5; /* section contrast */
   --ink: #241d16;          /* primary text — warm near-black */
   --ink-soft: #5a4a3c;     /* secondary text */
-  --bronze: #bd8f2a;       /* accent — aged brass / patina */
-  --bordeaux: #6b2839;     /* secondary accent — wine, hosted dinners */
+  --bronze: #c1443b;       /* accent — aged brass / patina */
+  --bordeaux: #e0b445;     /* secondary accent — wine, hosted dinners */
   --rose: #d9b3a8;         /* whisper accent, from the mark's origin */
   --line: #a9a889;         /* hairline rule */
-  --paper: #f8f1e7;        /* card surface, lighter than bg */
+  --paper: #c9a3b8;        /* card surface, lighter than bg */
   --umber: #4d1f2e;         /* footer background */
 }
 
