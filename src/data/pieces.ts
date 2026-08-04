@@ -211,7 +211,13 @@ export const pieces: Piece[] = [
     price: "$4,500",
     category: "Art",
     sold: false,
-    images: ["/collection/caterpillar-lorna.webp"],
+    images: [
+      "/collection/caterpillar-lorna.webp",
+      "/collection/caterpillar-lorna-2.webp",
+      "/collection/caterpillar-lorna-3.webp",
+      "/collection/caterpillar-lorna-4.webp",
+      "/collection/caterpillar-lorna-5.webp",
+    ],
     note: "This painting tells a story of women heading into the bush collecting bush tucker. The women would travel all day in large groups, singing and dancing as they collected food to take back to their large families at the campsite.",
   },
 ];
