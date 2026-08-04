@@ -2,8 +2,8 @@
 
 :root {
   /* Color tokens — warm Elizabeth Bay apartment palette */
-  --plaster: #eeedea;      /* background — aged plaster wall */
-  --plaster-deep: #9f3b45; /* section contrast */
+  --plaster: #ffffff;      /* background — aged plaster wall */
+  --plaster-deep: #7b9146; /* section contrast */
   --ink: #221e19;          /* primary text — warm near-black */
   --ink-soft: #4a423a;     /* secondary text */
   --bronze: #8a6a3c;       /* accent — aged brass / patina */
@@ -11,7 +11,7 @@
   --rose: #dcb9bd;         /* whisper accent, from the mark's origin */
   --line: #c6b99f;         /* hairline rule */
   --paper: #f4efe4;        /* card surface, lighter than bg */
-  --umber: #847269;         /* footer background */
+  --umber: #feeb49;         /* footer background */
 }
 
 @theme inline {
