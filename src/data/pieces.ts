@@ -220,4 +220,19 @@ export const pieces: Piece[] = [
     ],
     note: "This painting tells a story of women heading into the bush collecting bush tucker. The women would travel all day in large groups, singing and dancing as they collected food to take back to their large families at the campsite.",
   },
+  {
+    slug: "bush-potato-lorna-naparrula-fencer",
+    title: "Bush Potato by Lorna Naparrula Fencer",
+    era: "2000",
+    material: "92 × 62cm",
+    price: "$3,000",
+    category: "Art",
+    sold: false,
+    images: [
+      "/collection/lorna-fencer-bush-potato.webp",
+      "/collection/lorna-fencer-bush-potato-2.webp",
+      "/collection/lorna-fencer-bush-potato-3.webp",
+    ],
+    note: "Lorna Fencer is custodian for Bush Potato, her principal Dreaming and most common painting subject. The depiction signifies fertility, an important subject of Women's Business.",
+  },
 ];
