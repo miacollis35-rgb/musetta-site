@@ -17,7 +17,7 @@ export default function Nav() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-10">
         <Link href="/" className="flex items-center" aria-label="Musetta home">
           <Image
-            src="/brand/musetta-logo-full.svg"
+            src="/brand/musetta-wordmark-nav.svg"
             alt="Musetta"
             width={2904}
             height={852}
