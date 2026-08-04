@@ -2,8 +2,8 @@
 
 :root {
   /* Color tokens — warm Elizabeth Bay apartment palette */
-  --plaster: #e7e0d1;      /* background — aged plaster wall */
-  --plaster-deep: #ded5c1; /* section contrast */
+  --plaster: #a5b5a6;      /* background — aged plaster wall */
+  --plaster-deep: #b96869; /* section contrast */
   --ink: #221e19;          /* primary text — warm near-black */
   --ink-soft: #4a423a;     /* secondary text */
   --bronze: #8a6a3c;       /* accent — aged brass / patina */
