@@ -21,17 +21,7 @@ const scenes: Scene[] = [
       { slug: "oak-dining-chairs-set-of-six", top: "68%", left: "50%" },
     ],
   },
-  {
-    id: "jar-mirrors",
-    image: "/showroom/interior-jar-mirrors.webp",
-    alt: "The ginger jar, bamboo mirror, and Hollywood Regency mirror in the Musetta showroom",
-    hotspots: [
-      { slug: "giltwood-bamboo-mirror", top: "25%", left: "22%" },
-      { slug: "hollywood-regency-mirror", top: "25%", left: "78%" },
-      { slug: "chinese-blue-white-ginger-jar", top: "60%", left: "50%" },
-    ],
-  },
-  {
+{
     id: "bamboo-lamp",
     image: "/collection/mirror-octagon-bamboo.webp",
     alt: "The octagonal bamboo mirror and Bondia table lamp in the Musetta showroom",
@@ -39,6 +29,36 @@ const scenes: Scene[] = [
       { slug: "octagonal-bamboo-mirror", top: "23%", left: "21%" },
       { slug: "ceramic-pineapple-lamp", top: "49%", left: "50%" },
     ],
+  },
+  {
+    id: "lounge-harbour-view",
+    image: "/showroom/lounge-harbour-view.jpg",
+    alt: "The lounge seating and gilt mirror with a harbour view in the Musetta showroom",
+    hotspots: [],
+  },
+  {
+    id: "colour-block-corner",
+    image: "/showroom/colour-block-corner.jpg",
+    alt: "Colour-field paintings and a dot painting in a corner of the Musetta showroom",
+    hotspots: [],
+  },
+  {
+    id: "gilt-mirror-evening",
+    image: "/showroom/gilt-mirror-evening.jpg",
+    alt: "The gilt mirror and framed still life at golden hour in the Musetta showroom",
+    hotspots: [],
+  },
+  {
+    id: "mirror-harbour-reflection",
+    image: "/showroom/mirror-harbour-reflection.jpg",
+    alt: "The gilt mirror reflecting the harbour balcony in the Musetta showroom",
+    hotspots: [],
+  },
+  {
+    id: "abstracts-harbour-corner",
+    image: "/showroom/abstracts-harbour-corner.jpg",
+    alt: "Abstract paintings and framed prints with a harbour view in the Musetta showroom",
+    hotspots: [],
   },
 ];
 
