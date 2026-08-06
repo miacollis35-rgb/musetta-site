@@ -91,6 +91,35 @@ export default async function PiecePage({
         name: "Musetta",
       },
     },
+    hasMerchantReturnPolicy: {
+      "@type": "MerchantReturnPolicy",
+      returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+    },
+    // Courier is available too, but the rate is quoted per piece and
+    // varies — schema.org has no field for a variable rate, so we only
+    // declare the one delivery method with a real, fixed cost (free
+    // in-person collection) rather than invent a courier figure.
+    shippingDetails: {
+      "@type": "OfferShippingDetails",
+      shippingDestination: {
+        "@type": "DefinedRegion",
+        addressCountry: "AU",
+      },
+      shippingRate: {
+        "@type": "MonetaryAmount",
+        value: "0",
+        currency: "AUD",
+      },
+      deliveryTime: {
+        "@type": "ShippingDeliveryTime",
+        handlingTime: {
+          "@type": "QuantitativeValue",
+          minValue: 0,
+          maxValue: 3,
+          unitCode: "DAY",
+        },
+      },
+    },
   };
 
   return (
