@@ -142,7 +142,7 @@ export const pieces: Piece[] = [
   },
   {
     slug: "oak-dining-chairs-set-of-six",
-    title: "Set of six oak dining chairs",
+    title: "Set of Six Oak Dining Chairs by Henning Kjærnulf",
     era: "Mid-20th century",
     material: "Solid oak, striped wool upholstery",
     price: "$1,400",
@@ -157,7 +157,7 @@ export const pieces: Piece[] = [
       "/collection/dining-chairs-6.webp",
       "/collection/dining-chairs-7.webp",
     ],
-    note: "Sold as a set of six. Upholstery is original and in good condition.",
+    note: "Designed by Henning Kjærnulf. Sold as a set of six. Upholstery is original and in good condition.",
   },
   {
     slug: "octagonal-bamboo-mirror",
