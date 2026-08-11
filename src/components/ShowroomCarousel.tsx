@@ -120,7 +120,7 @@ export default function ShowroomCarousel() {
           fill
           sizes="(min-width: 768px) 800px, 100vw"
           priority
-          className="object-cover"
+          className="object-contain"
         />
 
         {scene.hotspots.map((h) => {
